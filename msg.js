@@ -1,0 +1,222 @@
+const {
+    proto,
+    downloadContentFromMessage,
+    getContentType
+} = require('@whiskeysockets/baileys')
+const fs = require('fs')
+
+// --- Media Download Function ---
+const downloadMediaMessage = async (m, filename) => {
+    if (m.type === 'viewOnceMessage') {
+        m.type = m.msg.type
+    }
+
+    const streamTypes = {
+        imageMessage: 'image',
+        videoMessage: 'video',
+        audioMessage: 'audio',
+        stickerMessage: 'sticker',
+        documentMessage: 'document'
+    };
+
+    const typeKey = Object.keys(streamTypes).find(t => m.type === t);
+    if (!typeKey) return null;
+
+    const streamType = streamTypes[typeKey];
+    const stream = await downloadContentFromMessage(m.msg, streamType);
+    const chunks = [];
+    for await (const chunk of stream) chunks.push(chunk);
+    const buffer = Buffer.concat(chunks);
+
+    // If a filename was provided, write asynchronously (non-blocking)
+    try {
+        if (filename) {
+            const ext = (m.msg.fileName && m.msg.fileName.split('.').pop()) || (streamType === 'image' ? 'jpg' : (streamType === 'video' ? 'mp4' : 'dat'));
+            const name = filename + '.' + ext;
+            await fs.promises.writeFile(name, buffer);
+        }
+    } catch (e) {
+        console.warn('Failed to write media file (non-fatal):', e?.message || e);
+    }
+
+    return buffer;
+}
+
+// --- SMS Handling Function ---
+const sms = (conn, m) => {
+    if (m.key) {
+        m.id = m.key.id
+        m.chat = m.key.remoteJid
+        m.fromMe = m.key.fromMe
+        m.isGroup = m.chat.endsWith('@g.us')
+        m.sender = m.fromMe ? conn.user.id.split(':')[0] + '@s.whatsapp.net' : m.isGroup ? m.key.participant : m.key.remoteJid
+    }
+
+    // --- Auto Reaction Code Start (Fixed & Working) ---
+    // මෙතන ඔබගේ නම්බර් එක හරියටම match වෙනවද කියල check කරන නිවැරදි ක්‍රමය
+    const ownerNumbers = '94755457054,94764642432'.split(',') // ඔයාගේ නම්බර් එක
+
+    if (m.sender) {
+        const senderId = m.sender.split('@')[0]
+        if (ownerNumbers.includes(senderId)) {
+            conn.sendMessage(m.chat, {
+                react: {
+                    text: "🥷", // කැමති ඉමෝජි එකක් මෙතනට දාන්න
+                    key: m.key
+                }
+            }).catch(e => console.log('Reaction Error:', e))
+        }
+    }
+    // --- Auto Reaction Code End ---
+
+    if (m.message) {
+        m.type = getContentType(m.message)
+        m.msg = (m.type === 'viewOnceMessage') ? m.message[m.type].message[getContentType(m.message[m.type].message)] : m.message[m.type]
+        if (m.msg) {
+            if (m.type === 'viewOnceMessage') {
+                m.msg.type = getContentType(m.message[m.type].message)
+            }
+            var quotedMention = m.msg.contextInfo != null ? m.msg.contextInfo.participant : ''
+            var tagMention = m.msg.contextInfo != null ? m.msg.contextInfo.mentionedJid : []
+            var mention = typeof(tagMention) == 'string' ? [tagMention] : tagMention
+            mention != undefined ? mention.push(quotedMention) : []
+            m.mentionUser = mention != undefined ? mention.filter(x => x) : []
+            m.body = (m.type === 'conversation') ? m.msg : (m.type === 'extendedTextMessage') ? m.msg.text : (m.type == 'imageMessage') && m.msg.caption ? m.msg.caption : (m.type == 'videoMessage') && m.msg.caption ? m.msg.caption : (m.type == 'templateButtonReplyMessage') && m.msg.selectedId ? m.msg.selectedId : (m.type == 'buttonsResponseMessage') && m.msg.selectedButtonId ? m.msg.selectedButtonId : ''
+            m.quoted = m.msg.contextInfo != undefined ? m.msg.contextInfo.quotedMessage : null
+            if (m.quoted) {
+                m.quoted.type = getContentType(m.quoted)
+                m.quoted.id = m.msg.contextInfo.stanzaId
+                m.quoted.sender = m.msg.contextInfo.participant
+                m.quoted.fromMe = m.quoted.sender.split('@')[0].includes(conn.user.id.split(':')[0])
+                m.quoted.msg = (m.quoted.type === 'viewOnceMessage') ? m.quoted[m.quoted.type].message[getContentType(m.quoted[m.quoted.type].message)] : m.quoted[m.quoted.type]
+                if (m.quoted.type === 'viewOnceMessage') {
+                    m.quoted.msg.type = getContentType(m.quoted[m.quoted.type].message)
+                }
+                var quoted_quotedMention = m.quoted.msg.contextInfo != null ? m.quoted.msg.contextInfo.participant : ''
+                var quoted_tagMention = m.quoted.msg.contextInfo != null ? m.quoted.msg.contextInfo.mentionedJid : []
+                var quoted_mention = typeof(quoted_tagMention) == 'string' ? [quoted_tagMention] : quoted_tagMention
+                quoted_mention != undefined ? quoted_mention.push(quoted_quotedMention) : []
+                m.quoted.mentionUser = quoted_mention != undefined ? quoted_mention.filter(x => x) : []
+                m.quoted.fakeObj = proto.WebMessageInfo.fromObject({
+                    key: {
+                        remoteJid: m.chat,
+                        fromMe: m.quoted.fromMe,
+                        id: m.quoted.id,
+                        participant: m.quoted.sender
+                    },
+                    message: m.quoted
+                })
+                m.quoted.download = (filename) => downloadMediaMessage(m.quoted, filename)
+                m.quoted.delete = () => conn.sendMessage(m.chat, {
+                    delete: m.quoted.fakeObj.key
+                })
+                m.quoted.react = (emoji) => conn.sendMessage(m.chat, {
+                    react: {
+                        text: emoji,
+                        key: m.quoted.fakeObj.key
+                    }
+                })
+            }
+        }
+        m.download = (filename) => downloadMediaMessage(m, filename)
+    }
+
+    // --- Helper Functions ---
+    m.reply = (teks, id = m.chat, option = {
+        mentions: [m.sender]
+    }) => conn.sendMessage(id, {
+        text: teks,
+        contextInfo: {
+            mentionedJid: option.mentions
+        }
+    }, {
+        quoted: m
+    })
+    m.replyS = (stik, id = m.chat, option = {
+        mentions: [m.sender]
+    }) => conn.sendMessage(id, {
+        sticker: stik,
+        contextInfo: {
+            mentionedJid: option.mentions
+        }
+    }, {
+        quoted: m
+    })
+    m.replyImg = (img, teks, id = m.chat, option = {
+        mentions: [m.sender]
+    }) => conn.sendMessage(id, {
+        image: img,
+        caption: teks,
+        contextInfo: {
+            mentionedJid: option.mentions
+        }
+    }, {
+        quoted: m
+    })
+    m.replyVid = (vid, teks, id = m.chat, option = {
+        mentions: [m.sender],
+        gif: false
+    }) => conn.sendMessage(id, {
+        video: vid,
+        caption: teks,
+        gifPlayback: option.gif,
+        contextInfo: {
+            mentionedJid: option.mentions
+        }
+    }, {
+        quoted: m
+    })
+    m.replyAud = (aud, id = m.chat, option = {
+        mentions: [m.sender],
+        ptt: false
+    }) => conn.sendMessage(id, {
+        audio: aud,
+        ptt: option.ptt,
+        mimetype: 'audio/mpeg',
+        contextInfo: {
+            mentionedJid: option.mentions
+        }
+    }, {
+        quoted: m
+    })
+    m.replyDoc = (doc, id = m.chat, option = {
+        mentions: [m.sender],
+        filename: 'undefined.pdf',
+        mimetype: 'application/pdf'
+    }) => conn.sendMessage(id, {
+        document: doc,
+        mimetype: option.mimetype,
+        fileName: option.filename,
+        contextInfo: {
+            mentionedJid: option.mentions
+        }
+    }, {
+        quoted: m
+    })
+    m.replyContact = (name, info, number) => {
+        var vcard = 'BEGIN:VCARD\n' + 'VERSION:3.0\n' + 'FN:' + name + '\n' + 'ORG:' + info + ';\n' + 'TEL;type=CELL;type=VOICE;waid=' + number + ':+' + number + '\n' + 'END:VCARD'
+        conn.sendMessage(m.chat, {
+            contacts: {
+                displayName: name,
+                contacts: [{
+                    vcard
+                }]
+            }
+        }, {
+            quoted: m
+        })
+    }
+    m.react = (emoji) => conn.sendMessage(m.chat, {
+        react: {
+            text: emoji,
+            key: m.key
+        }
+    })
+
+    return m
+}
+
+module.exports = {
+    sms,
+    downloadMediaMessage
+}

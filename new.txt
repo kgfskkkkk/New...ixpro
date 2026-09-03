@@ -1,0 +1,468 @@
+name: Ubuntu Bot Runner
+
+on:
+  workflow_dispatch:
+
+jobs:
+  bot:
+    runs-on: ubuntu-latest
+
+    # GitHub Actions maximum runtime for this job
+    # 345 minutes = 5 hours 45 minutes
+    timeout-minutes: 345
+
+    steps:
+
+      # ==========================================
+      # CHECKOUT
+      # ==========================================
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # ==========================================
+      # UBUNTU SETUP
+      #
+      # FIXED: added the Puppeteer/Chromium system libs (with sudo). The repo's
+      # npm "preinstall" tries to apt-get these WITHOUT sudo, which fails on
+      # GitHub runners, so Chromium/puppeteer would not launch. Installing them
+      # here (as root) makes puppeteer-dependent commands work.
+      # ==========================================
+      - name: Ubuntu Setup
+        shell: bash
+        run: |
+          set -e
+
+          export DEBIAN_FRONTEND=noninteractive
+
+          sudo apt-get update
+
+          sudo apt-get install -y \
+            curl \
+            git \
+            unzip \
+            p7zip-full \
+            ca-certificates \
+            gnupg \
+            python3 \
+            python3-pip \
+            python3-venv \
+            tmate \
+            libatk1.0-0 libatk-bridge2.0-0 libgtk-3-0 \
+            libgbm1 libxkbcommon0 libxshmfence1 libcups2 \
+            libxcomposite1 libxcursor1 libxdamage1 libxext6 \
+            libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 \
+            libxtst6 libpango-1.0-0 libpangocairo-1.0-0 libcairo2 \
+            libasound2t64
+
+          echo
+          echo "========== SYSTEM =========="
+          uname -a
+          echo
+          python3 --version
+          git --version
+          curl --version | head -n 1
+
+      # ==========================================
+      # DOWNLOAD LIVEY SCRIPT
+      # ==========================================
+      - name: Download Livey Setup
+        shell: bash
+        run: |
+          set -e
+
+          curl -fsSL \
+            "https://gist.githubusercontent.com/Dilu-x/99ec4f49a5b3dd6c51d0d706c4ba6c52/raw" \
+            -o /tmp/livey-setup.sh
+
+          chmod +x /tmp/livey-setup.sh
+
+          echo "Setup script downloaded successfully."
+          ls -lh /tmp/livey-setup.sh
+
+      # ==========================================
+      # RUN LIVEY SETUP
+      #
+      # Inputs:
+      #
+      # 1 = Cloudflare Yes
+      # 1 = Default token
+      # 1 = Cloudflare service Yes
+      # 1 = Default repository
+      # 1 = npm install
+      # 3 = PM2
+      # Enter
+      # 18 = Exit
+      # Enter
+      #
+      # TERM fix prevents:
+      # "unknown: I need something more specific."
+      # ==========================================
+      - name: Run Livey Setup
+        shell: bash
+        env:
+          TERM: xterm-256color
+          DEBIAN_FRONTEND: noninteractive
+        run: |
+          set -o pipefail
+
+          echo "=========================================="
+          echo "        STARTING LIVEY SETUP"
+          echo "=========================================="
+
+          # GitHub Actions has no normal terminal.
+          # Livey uses clear/select/read, so provide a valid TERM.
+          export TERM=xterm-256color
+
+          # Disable problematic terminal behavior
+          export GIT_TERMINAL_PROMPT=0
+
+          # Feed selections to the script
+          printf '%s\n' \
+            "1" \
+            "1" \
+            "1" \
+            "1" \
+            "1" \
+            "3" \
+            "" \
+            "18" \
+            "" \
+          | sudo -E env \
+              TERM=xterm-256color \
+              DEBIAN_FRONTEND=noninteractive \
+              bash /tmp/livey-setup.sh \
+              > /tmp/livey-setup.log 2>&1
+
+          EXIT_CODE=$?
+
+          echo
+          echo "=========================================="
+          echo "       LIVEY SETUP EXIT CODE: $EXIT_CODE"
+          echo "=========================================="
+
+          echo
+          echo "========== LIVEY LOG =========="
+          tail -n 200 /tmp/livey-setup.log || true
+
+          exit "$EXIT_CODE"
+
+      # ==========================================
+      # SHOW WORKSPACE
+      # ==========================================
+      - name: Check Workspace
+        shell: bash
+        run: |
+          echo
+          echo "=========================================="
+          echo "          CURRENT WORKSPACE"
+          echo "=========================================="
+
+          pwd
+
+          echo
+          ls -la
+
+          echo
+          echo "Directories:"
+          find . -maxdepth 2 -type d -print | sort
+
+      # ==========================================
+      # FIX ROOT OWNERSHIP
+      #
+      # Livey runs as root and clones base-v
+      # Therefore npm as runner gets EACCES.
+      # ==========================================
+      - name: Fix Project Permissions
+        shell: bash
+        run: |
+          set -e
+
+          echo "=========================================="
+          echo "       FIXING PROJECT PERMISSIONS"
+          echo "=========================================="
+
+          if [ -d "base-v" ]; then
+
+            echo "Before:"
+            ls -ld base-v
+
+            sudo chown -R "$(id -u):$(id -g)" base-v
+
+            chmod -R u+rwX base-v
+
+            echo
+            echo "After:"
+            ls -ld base-v
+
+          else
+            echo "ERROR: base-v directory not found."
+            exit 1
+          fi
+
+      # ==========================================
+      # NODE CHECK
+      # ==========================================
+      - name: Check Node.js
+        shell: bash
+        run: |
+          set -e
+
+          echo "Node:"
+          node -v
+
+          echo "NPM:"
+          npm -v
+
+      # ==========================================
+      # INSTALL PM2
+      # ==========================================
+      - name: Install PM2
+        shell: bash
+        run: |
+          set -e
+
+          if ! command -v pm2 >/dev/null 2>&1; then
+            sudo npm install -g pm2
+          fi
+
+          echo
+          echo "PM2:"
+          pm2 -v
+
+      # ==========================================
+      # BASE-V NPM INSTALL
+      # ==========================================
+      - name: Install Base-V Dependencies
+        shell: bash
+        run: |
+          set -e
+
+          if [ ! -d "base-v" ]; then
+            echo "ERROR: base-v directory not found."
+            exit 1
+          fi
+
+          cd base-v
+
+          echo
+          echo "=========================================="
+          echo "        INSTALLING BASE-V"
+          echo "=========================================="
+
+          # Make absolutely sure runner owns the directory
+          sudo chown -R "$(id -u):$(id -g)" .
+
+          npm install
+
+          echo
+          echo "Base-V npm install completed."
+
+      # ==========================================
+      # INSTALL MIRURO API PYTHON DEPS
+      #
+      # Install the FastAPI deps (as root) so `npm start` can auto-start the
+      # anime API (uvicorn on :8003). index.js also self-heals with a --user
+      # pip install if this is skipped, but installing here is deterministic.
+      # ==========================================
+      - name: Install Miruro API Python deps
+        shell: bash
+        run: |
+          set -e
+
+          cd base-v
+
+          sudo python3 -m pip install --break-system-packages -r miruro-api/requirements.txt \
+            || sudo python3 -m pip install -r miruro-api/requirements.txt \
+            || true
+
+          echo
+          echo "Miruro Python deps ready."
+
+      # ==========================================
+      # START BASE-V
+      #
+      # FIXED: `npm start` (node index.js) NOW auto-starts BOTH the WhatsApp bot
+      # AND the miruro-api (uvicorn on port 8003). It also auto-starts
+      # FlareSolverr if Docker is available. So the old manual miruro-api steps
+      # (venv + `python main.py`) were removed — they were broken anyway, because
+      # miruro-api/main.py has no `__main__` block, so `python main.py` exits
+      # immediately. Miruro-api logs now appear in `pm2 logs base-v` (prefixed
+      # `[miruro-api]`).
+      # ==========================================
+      - name: Start Base-V
+        shell: bash
+        run: |
+          set -e
+
+          cd base-v
+
+          echo
+          echo "=========================================="
+          echo "          STARTING BASE-V"
+          echo "=========================================="
+
+          # Remove stale process only if it exists
+          if pm2 describe base-v >/dev/null 2>&1; then
+            echo "Existing base-v process found."
+            pm2 restart base-v
+          else
+            echo "Starting new base-v process."
+
+            pm2 start npm \
+              --name base-v \
+              --cwd "$(pwd)" \
+              -- start
+          fi
+
+          pm2 save
+
+          echo
+          echo "========== BASE-V STATUS =========="
+
+          pm2 status
+
+      # ==========================================
+      # CREATE TMATE
+      # ==========================================
+      - name: Create Tmate Session
+        shell: bash
+        run: |
+          set -e
+
+          echo
+          echo "=========================================="
+          echo "        CREATING TMATE SESSION"
+          echo "=========================================="
+
+          rm -f /tmp/tmate.sock
+
+          tmate -S /tmp/tmate.sock new-session -d
+
+          tmate -S /tmp/tmate.sock wait tmate-ready
+
+          SSH_URL=$(tmate \
+            -S /tmp/tmate.sock \
+            display -p '#{tmate_ssh}')
+
+          WEB_URL=$(tmate \
+            -S /tmp/tmate.sock \
+            display -p '#{tmate_web}')
+
+          echo "TMATE_SSH=$SSH_URL" >> "$GITHUB_ENV"
+          echo "TMATE_WEB=$WEB_URL" >> "$GITHUB_ENV"
+
+          echo
+          echo "=========================================="
+          echo "          TMATE SESSION CREATED"
+          echo "=========================================="
+
+          echo
+          echo "SSH:"
+          echo "$SSH_URL"
+
+          echo
+          echo "WEB:"
+          echo "$WEB_URL"
+
+          echo
+          echo "=========================================="
+
+      # ==========================================
+      # FINAL STATUS
+      # ==========================================
+      - name: Show Final Status
+        shell: bash
+        run: |
+          echo
+          echo "=========================================="
+          echo "            FINAL STATUS"
+          echo "=========================================="
+
+          echo
+          echo "========== PM2 =========="
+          pm2 status || true
+
+          echo
+          echo "========== PROCESSES =========="
+
+          ps aux | grep -E \
+            "node|python|pm2|cloudflared|tmate" \
+            | grep -v grep || true
+
+          echo
+          echo "========== BASE-V =========="
+
+          pm2 describe base-v || true
+
+          echo
+          echo "========== BASE-V LOG (includes [miruro-api]) =========="
+
+          pm2 logs base-v \
+            --lines 30 \
+            --nostream || true
+
+          echo
+          echo "========== TMATE SSH =========="
+          echo "$TMATE_SSH"
+
+          echo
+          echo "========== TMATE WEB =========="
+          echo "$TMATE_WEB"
+
+      # ==========================================
+      # KEEP EVERYTHING RUNNING
+      #
+      # sleep 300 = status every 5 minutes
+      # NOT a 5-minute timeout.
+      #
+      # Workflow timeout = 345 minutes.
+      # ==========================================
+      - name: Keep Bots Running
+        shell: bash
+        run: |
+          echo
+          echo "=========================================="
+          echo "       BASE-V + MIRURO API RUNNING"
+          echo "=========================================="
+
+          echo
+          echo "Maximum workflow runtime:"
+          echo "5 HOURS 45 MINUTES"
+
+          echo
+          echo "TMATE SSH:"
+          echo "$TMATE_SSH"
+
+          echo
+          echo "TMATE WEB:"
+          echo "$TMATE_WEB"
+
+          echo
+          echo "=========================================="
+
+          while true; do
+
+            echo
+            echo "========== $(date) =========="
+
+            echo
+            echo "--- PM2 STATUS ---"
+            pm2 status || true
+
+            echo
+            echo "--- BASE-V ---"
+            pm2 describe base-v || true
+
+            echo
+            echo "--- BASE-V LOG (includes [miruro-api]) ---"
+            pm2 logs base-v --lines 10 --nostream || true
+
+            echo
+            echo "--- TMATE ---"
+            echo "$TMATE_SSH"
+
+            # Status interval only.
+            # Workflow itself remains alive until 345-minute timeout.
+            sleep 300
+
+          done

@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<title>ISHAN-X · Control</title>
+<style>
+  :root{
+    --bg-0:#05070a;--bg-1:#0a1210;--panel:#0d1512;--panel-line:#14311f;
+    --green:#00e676;--green-soft:#7cffb2;--green-dim:#0a3b23;
+    --text-hi:#eef4ef;--text-mid:#a9b8ac;--text-low:#5f7264;
+    --danger:#ff6b6b;--warn:#ffb74d;--radius:12px;
+    --mono:'JetBrains Mono','Courier New',monospace;
+    --body:'Poppins',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%}
+  body{
+    background:radial-gradient(60vw 40vh at 85% -10%,rgba(0,230,118,.07),transparent 60%),
+               radial-gradient(50vw 30vh at 5% 110%,rgba(0,230,118,.05),transparent 60%),var(--bg-0);
+    color:var(--text-hi);font-family:var(--body);line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:20px 22px 60px}
+
+  /* login */
+  #login{
+    position:fixed;inset:0;display:flex;align-items:center;justify-content:center;
+    background:var(--bg-0);z-index:20;flex-direction:column;gap:0;padding:20px;
+  }
+  #login.hidden,#app.hidden{display:none}
+  .login-card{
+    width:100%;max-width:360px;background:var(--panel);border:1px solid var(--panel-line);
+    border-radius:16px;padding:34px 28px;text-align:center;
+  }
+  .login-card h1{font-family:var(--mono);font-size:18px;margin:0 0 4px;color:var(--green-soft)}
+  .login-card p{font-size:12.5px;color:var(--text-low);margin:0 0 22px;letter-spacing:.04em}
+  .login-card input{
+    width:100%;padding:13px 14px;border-radius:10px;border:1px solid var(--panel-line);
+    background:#0a100d;color:var(--text-hi);font-size:15px;outline:none;
+  }
+  .login-card input:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(0,230,118,.12)}
+  .login-card button{
+    margin-top:14px;width:100%;padding:13px 0;background:var(--green);color:#00170c;
+    border:none;border-radius:10px;font-weight:800;font-family:var(--mono);cursor:pointer;transition:.2s;
+  }
+  .login-card button:hover{transform:translateY(-1px);box-shadow:0 10px 22px rgba(0,230,118,.25)}
+  .login-msg{min-height:20px;margin-top:12px;font-size:13px;color:var(--danger);font-weight:600}
+
+  /* topbar */
+  .topbar{
+    display:flex;align-items:center;justify-content:space-between;gap:14px;
+    padding:14px 0;border-bottom:1px solid var(--panel-line);margin-bottom:18px;
+  }
+  .topbar .brand{font-family:var(--mono);font-weight:800;font-size:16px;letter-spacing:.02em}
+  .topbar .brand span{color:var(--green)}
+  .topbar .right{display:flex;align-items:center;gap:12px}
+  .chip{
+    font-family:var(--mono);font-size:11.5px;color:var(--text-mid);
+    border:1px solid var(--panel-line);border-radius:999px;padding:5px 12px;
+  }
+  .chip b{color:var(--green-soft)}
+  .btn{
+    font-family:var(--mono);font-weight:700;font-size:13px;padding:9px 16px;
+    border-radius:9px;border:1px solid var(--panel-line);background:transparent;
+    color:var(--text-hi);cursor:pointer;transition:.2s;
+  }
+  .btn:hover{border-color:var(--green);color:var(--green-soft)}
+  .btn-green{background:var(--green);color:#00170c;border-color:transparent}
+  .btn-green:hover{box-shadow:0 8px 20px rgba(0,230,118,.25);color:#00170c}
+  .btn-danger{color:var(--danger);border-color:#4a1f1f}
+  .btn-danger:hover{background:var(--danger);color:#1a0505;border-color:transparent}
+  .btn-sm{padding:5px 10px;font-size:12px}
+
+  /* tabs */
+  .tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:18px}
+  .tab{
+    font-family:var(--mono);font-size:13px;font-weight:700;padding:9px 18px;
+    border-radius:9px;border:1px solid var(--panel-line);background:transparent;
+    color:var(--text-mid);cursor:pointer;transition:.2s;
+  }
+  .tab:hover{color:var(--green-soft)}
+  .tab.active{background:var(--green-dim);border-color:var(--green);color:var(--green-soft)}
+
+  .pane{display:none}
+  .pane.active{display:block}
+
+  /* cards */
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px;margin-bottom:22px}
+  .card{
+    background:var(--panel);border:1px solid var(--panel-line);border-radius:var(--radius);
+    padding:18px 16px;
+  }
+  .card b{display:block;font-family:var(--mono);font-size:24px;color:var(--green-soft)}
+  .card span{font-size:11.5px;color:var(--text-low);letter-spacing:.06em;text-transform:uppercase}
+
+  /* tables */
+  .panel{
+    background:var(--panel);border:1px solid var(--panel-line);border-radius:var(--radius);
+    overflow:hidden;margin-bottom:18px;
+  }
+  .panel-head{
+    display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;
+    padding:14px 16px;border-bottom:1px solid var(--panel-line);
+    font-family:var(--mono);font-size:13px;color:var(--green-soft);
+  }
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th{
+    text-align:left;font-family:var(--mono);font-size:11px;letter-spacing:.08em;
+    color:var(--text-low);text-transform:uppercase;padding:9px 12px;
+    border-bottom:1px solid var(--panel-line);white-space:nowrap;
+  }
+  td{padding:9px 12px;border-bottom:1px solid var(--panel-line);color:var(--text-mid);vertical-align:top;word-break:break-word}
+  td.num{font-family:var(--mono);color:var(--text-hi)}
+  tr:last-child td{border-bottom:none}
+  .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:middle}
+  .dot.on{background:var(--green);box-shadow:0 0 8px var(--green)}
+  .dot.pair{background:var(--warn)}
+  .dot.off{background:var(--text-low)}
+  .dot.bad{background:var(--danger)}
+  .badge{
+    display:inline-block;font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;
+    border-radius:6px;padding:3px 8px;margin-right:4px;border:1px solid var(--panel-line);color:var(--text-mid);
+  }
+  .badge.g{color:var(--green-soft);border-color:var(--green-dim)}
+  .badge.r{color:var(--danger);border-color:#4a1f1f}
+
+  .actions-cell{white-space:nowrap}
+  .actions-cell .btn{margin-right:6px}
+
+  /* forms */
+  .field{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
+  .field label{font-size:12px;color:var(--text-low);font-family:var(--mono);letter-spacing:.04em}
+  .field input,.field select,.field textarea{
+    width:100%;padding:10px 12px;border-radius:9px;border:1px solid var(--panel-line);
+    background:#0a100d;color:var(--text-hi);font-size:13.5px;outline:none;font-family:var(--body);
+  }
+  .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--green)}
+  .field textarea{min-height:120px;font-family:var(--mono);font-size:12.5px;line-height:1.5}
+
+  /* modal */
+  .modal{
+    position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;
+    align-items:flex-start;justify-content:center;z-index:50;padding:40px 18px;overflow:auto;
+  }
+  .modal.open{display:flex}
+  .modal-box{
+    width:100%;max-width:560px;background:var(--panel);border:1px solid var(--panel-line);
+    border-radius:14px;padding:22px;
+  }
+  .modal-box h3{font-family:var(--mono);font-size:15px;margin:0 0 16px;color:var(--green-soft)}
+  .modal-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:16px}
+
+  .msg{min-height:20px;font-size:13px;font-weight:600}
+  .msg.ok{color:var(--green-soft)}
+  .msg.err{color:var(--danger)}
+  .sub{font-size:12px;color:var(--text-low);margin:0 0 16px}
+  .toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:16px}
+  .toolbar select{
+    padding:9px 12px;border-radius:9px;border:1px solid var(--panel-line);background:#0a100d;
+    color:var(--text-hi);font-size:13.5px;font-family:var(--mono);outline:none;
+  }
+  .pager{display:flex;gap:8px;align-items:center;justify-content:flex-end;padding:12px 16px}
+  .pager span{font-family:var(--mono);font-size:12px;color:var(--text-low)}
+  .wrap-json pre{
+    background:#0a100d;border:1px solid var(--panel-line);border-radius:9px;
+    padding:12px;overflow:auto;font-family:var(--mono);font-size:12px;color:var(--text-hi);margin:0;
+  }
+  .loader{color:var(--text-low);font-family:var(--mono);font-size:13px;padding:18px 16px}
+  @media (max-width:640px){
+    .topbar{flex-wrap:wrap}
+    td,th{white-space:nowrap}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ LOGIN ============ -->
+<div id="login">
+  <div class="login-card">
+    <h1>ISHAN-X · CONTROL</h1>
+    <p>ADMIN ACCESS</p>
+    <input id="loginPass" type="password" placeholder="Password" autocomplete="current-password" />
+    <button id="loginBtn">UNLOCK</button>
+    <div class="login-msg" id="loginMsg"></div>
+  </div>
+</div>
+
+<!-- ============ APP ============ -->
+<div id="app" class="hidden">
+  <div class="wrap">
+
+    <div class="topbar">
+      <div class="brand"><span>▮</span> ISHAN-X&nbsp;CONTROL</div>
+      <div class="right">
+        <span class="chip" id="chipActive"><b>0</b> active</span>
+        <span class="chip" id="chipUsers"><b>0</b> users</span>
+        <button class="btn" id="logoutBtn">LOGOUT</button>
+      </div>
+    </div>
+
+    <div class="tabs" id="tabs">
+      <button class="tab active" data-tab="overview">Overview</button>
+      <button class="tab" data-tab="users">Users</button>
+      <button class="tab" data-tab="admins">Admins</button>
+      <button class="tab" data-tab="mongo">Mongo DB</button>
+      <button class="tab" data-tab="actions">Actions</button>
+    </div>
+
+    <!-- OVERVIEW -->
+    <div class="pane active" id="pane-overview">
+      <div class="cards" id="overviewCards"></div>
+      <div class="panel">
+        <div class="panel-head">Runtime</div>
+        <div class="wrap-json" style="padding:14px 16px"><pre id="runtimePre">loading…</pre></div>
+      </div>
+    </div>
+
+    <!-- USERS -->
+    <div class="pane" id="pane-users">
+      <div class="toolbar">
+        <input id="userSearch" placeholder="Search number…" style="padding:9px 12px;border-radius:9px;border:1px solid var(--panel-line);background:#0a100d;color:var(--text-hi);font-size:13.5px;font-family:var(--mono);outline:none" />
+        <button class="btn" id="refreshUsers">Refresh</button>
+        <span class="sub" style="margin:0">Registered WhatsApp numbers &amp; their sessions</span>
+      </div>
+      <div class="panel">
+        <div class="panel-head">Users</div>
+        <div id="usersWrap"><div class="loader">loading…</div></div>
+      </div>
+    </div>
+
+    <!-- ADMINS -->
+    <div class="pane" id="pane-admins">
+      <div class="toolbar">
+        <input id="adminJid" placeholder="JID or number…" style="padding:9px 12px;border-radius:9px;border:1px solid var(--panel-line);background:#0a100d;color:var(--text-hi);font-size:13.5px;font-family:var(--mono);outline:none" />
+        <button class="btn btn-green" id="addAdminBtn">+ Add Admin</button>
+        <span class="msg" id="adminMsg"></span>
+      </div>
+      <div class="panel">
+        <div class="panel-head">Admin list</div>
+        <div id="adminsWrap"><div class="loader">loading…</div></div>
+      </div>
+    </div>
+
+    <!-- MONGO -->
+    <div class="pane" id="pane-mongo">
+      <div class="toolbar">
+        <label style="font-size:12px;color:var(--text-low);font-family:var(--mono)">Collection</label>
+        <select id="colSelect"></select>
+        <button class="btn" id="colRefresh">Refresh</button>
+        <button class="btn btn-green btn-sm" id="colInsert">+ Insert doc</button>
+        <span class="msg" id="colMsg"></span>
+      </div>
+      <div class="panel">
+        <div class="panel-head" id="colTitle">—</div>
+        <div id="colDocsWrap"><div class="loader">select a collection</div></div>
+        <div class="pager" id="colPager" style="display:none">
+          <button class="btn btn-sm" id="prevPage">‹ Prev</button>
+          <span id="pageInfo"></span>
+          <button class="btn btn-sm" id="nextPage">Next ›</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ACTIONS -->
+    <div class="pane" id="pane-actions">
+      <div class="panel">
+        <div class="panel-head">Global actions</div>
+        <div style="padding:16px">
+          <p class="sub">Reconnect all registered numbers.</p>
+          <button class="btn btn-green" id="connectAllBtn">Connect all</button>
+          <p class="sub" style="margin-top:24px">Delete ALL sessions, numbers and temp session folders from Mongo + disk.</p>
+          <button class="btn btn-danger" id="clearAllBtn">Clear all sessions</button>
+          <p class="sub" style="margin-top:24px">Restart the whole process (pm2).</p>
+          <button class="btn btn-danger" id="restartBtn">Restart process</button>
+          <div class="msg" id="actionMsg"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ============ MODAL: user config ============ -->
+<div class="modal" id="configModal">
+  <div class="modal-box">
+    <h3 id="configTitle">User config</h3>
+    <div id="configBody"></div>
+    <div class="modal-actions">
+      <button class="btn" id="configCancel">Cancel</button>
+      <button class="btn btn-green" id="configSave">Save</button>
+    </div>
+    <div class="msg" id="configMsg"></div>
+  </div>
+</div>
+
+<!-- ============ MODAL: doc JSON ============ -->
+<div class="modal" id="docModal">
+  <div class="modal-box" style="max-width:720px">
+    <h3 id="docTitle">Document</h3>
+    <div class="field">
+      <label>JSON</label>
+      <textarea id="docJson" style="min-height:320px"></textarea>
+    </div>
+    <div class="modal-actions">
+      <button class="btn" id="docCancel">Close</button>
+      <button class="btn btn-danger" id="docDelete">Delete</button>
+      <button class="btn btn-green" id="docSave">Save</button>
+    </div>
+    <div class="msg" id="docMsg"></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  const API = '/bot/api';
+  const $ = id => document.getElementById(id);
+  let users = [];
+  let collections = [];
+  let selCol = null, colSkip = 0, colTotal = 0;
+  const colLimit = 50;
+  let docMode = 'view'; // 'view' | 'insert'
+  let docId = null, docCol = null;
+
+  const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+  function fmtTs(v){
+    if (!v) return '—';
+    try { return new Date(v).toLocaleString(); } catch(e){ return String(v); }
+  }
+  function short(s, n){
+    s = String(s);
+    return s.length > (n || 40) ? s.slice(0, n) + '…' : s;
+  }
+
+  async function api(path, opts){
+    opts = opts || {};
+    const res = await fetch(API + path, Object.assign({
+      headers: { 'Content-Type': 'application/json' }
+    }, opts));
+    if (res.status === 401) { showLogin(); throw new Error('unauthorized'); }
+    let data = null;
+    try { data = await res.json(); } catch(e){}
+    if (!res.ok) { throw new Error((data && data.error) || res.statusText); }
+    return data;
+  }
+  function post(path, body){
+    return api(path, { method: 'POST', body: JSON.stringify(body || {}) });
+  }
+
+  /* ---------- login ---------- */
+  function showLogin(){ $('login').classList.remove('hidden'); $('app').classList.add('hidden'); }
+  function showApp(){ $('login').classList.add('hidden'); $('app').classList.remove('hidden'); }
+
+  async function tryBoot(){
+    try {
+      const d = await api('/stats');
+      if (d.ok) { showApp(); return true; }
+      return false;
+    } catch(e){ return false; }
+  }
+
+  $('loginBtn').addEventListener('click', async () => {
+    const password = $('loginPass').value;
+    $('loginMsg').textContent = '';
+    try {
+      const res = await fetch('/bot/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password })
+      });
+      const data = await res.json().catch(() => ({}));
+      if (res.status !== 200) { $('loginMsg').textContent = data.error || 'Wrong password'; return; }
+      await boot();
+    } catch(e){ $('loginMsg').textContent = 'Login failed'; }
+  });
+  $('loginPass').addEventListener('keydown', e => { if (e.key === 'Enter') $('loginBtn').click(); });
+
+  $('logoutBtn').addEventListener('click', async () => {
+    try { await post('/logout'); } catch(e){}
+    showLogin();
+  });
+
+  /* ---------- tabs ---------- */
+  function switchTab(name){
+    document.querySelectorAll('.tab').forEach(b => b.classList.toggle('active', b.dataset.tab === name));
+    document.querySelectorAll('.pane').forEach(p => p.classList.toggle('active', p.id === 'pane-' + name));
+    if (name === 'overview') loadOverview();
+    if (name === 'users') loadUsers();
+    if (name === 'admins') loadAdmins();
+    if (name === 'mongo') loadCollections();
+  }
+  $('tabs').addEventListener('click', e => { if (e.target.classList.contains('tab')) switchTab(e.target.dataset.tab); });
+
+  /* ---------- boot ---------- */
+  async function boot(){
+    showApp();
+    switchTab('overview');
+    try {
+      const d = await api('/stats');
+      if (d.ok) {
+        $('chipActive').innerHTML = '<b>' + d.stats.active + '</b> active';
+        $('chipUsers').innerHTML = '<b>' + d.stats.numbers + '</b> users';
+      }
+    } catch(e){}
+  }
+
+  /* ---------- overview ---------- */
+  async function loadOverview(){
+    const cards = $('overviewCards');
+    cards.innerHTML = '<div class="loader">loading…</div>';
+    try {
+      const d = await api('/stats');
+      if (!d.ok) throw new Error(d.error);
+      const s = d.stats;
+      const items = [
+        ['Sessions', s.sessions], ['Numbers', s.numbers], ['Active', s.active],
+        ['Pairing', s.pairing], ['Logged out', s.loggedOut],
+        ['Admins', s.admins], ['Configs', s.configs], ['Newsletters', s.newsletters],
+        ['Collections', s.collections]
+      ];
+      cards.innerHTML = items.map(i =>
+        '<div class="card"><b>' + esc(i[1]) + '</b><span>' + esc(i[0]) + '</span></div>'
+      ).join('');
+      $('runtimePre').textContent = JSON.stringify({ uptime: Math.floor(s.uptime) + 's', db: 'ISHAN-CLOUD' }, null, 2);
+    } catch(e){ cards.innerHTML = '<div class="msg err">' + esc(e.message) + '</div>'; }
+  }
+
+  /* ---------- users ---------- */
+  async function loadUsers(){
+    const wrap = $('usersWrap');
+    wrap.innerHTML = '<div class="loader">loading…</div>';
+    try {
+      const d = await api('/users');
+      if (!d.ok) throw new Error(d.error);
+      users = d.users || [];
+      renderUsers();
+    } catch(e){ wrap.innerHTML = '<div class="msg err">' + esc(e.message) + '</div>'; }
+  }
+
+  function renderUsers(){
+    const q = ($('userSearch').value || '').trim();
+    const rows = users.filter(u => !q || String(u.number).indexOf(q) !== -1);
+    const wrap = $('usersWrap');
+    if (!rows.length) { wrap.innerHTML = '<div class="loader">no users</div>'; return; }
+    wrap.innerHTML =
+      '<table><thead><tr><th>Status</th><th>Number</th><th>Session</th><th>Updated</th><th>Config</th><th>Actions</th></tr></thead><tbody>' +
+      rows.map(u => {
+        const st = u.active ? '<span class="dot on"></span>active'
+                : u.loggedOut ? '<span class="dot bad"></span>logged out'
+                : u.pairing ? '<span class="dot pair"></span>pairing'
+                : '<span class="dot off"></span>offline';
+        const badges =
+          (u.session ? '<span class="badge g">mongo</span>' : '') +
+          (u.config.WORK_TYPE ? '<span class="badge">' + esc(u.config.WORK_TYPE) + '</span>' : '') +
+          (u.config.botName ? '<span class="badge">' + esc(short(u.config.botName, 14)) + '</span>' : '');
+        return '<tr>' +
+          '<td>' + st + '</td>' +
+          '<td class="num">' + esc(u.number) + '</td>' +
+          '<td>' + badges + '</td>' +
+          '<td style="white-space:nowrap">' + fmtTs(u.updatedAt) + '</td>' +
+          '<td style="max-width:220px">' + esc(short(JSON.stringify(u.config || {}), 90)) + '</td>' +
+          '<td class="actions-cell">' +
+            '<button class="btn btn-sm" data-act="cfg" data-num="' + esc(u.number) + '">Config</button>' +
+            '<button class="btn btn-sm btn-danger" data-act="del" data-num="' + esc(u.number) + '">Delete</button>' +
+          '</td>' +
+        '</tr>';
+      }).join('') + '</tbody></table>';
+  }
+
+  $('usersWrap').addEventListener('click', async e => {
+    const btn = e.target.closest('button[data-act]');
+    if (!btn) return;
+    const num = btn.dataset.num;
+    if (btn.dataset.act === 'cfg') openConfig(num);
+    if (btn.dataset.act === 'del') {
+      if (!confirm('Delete session ' + num + '? This removes it from Mongo + disk.')) return;
+      btn.disabled = true;
+      try {
+        const d = await post('/user/delete', { number: num });
+        alert(d.message || 'deleted');
+        await loadUsers();
+      } catch(e){ alert('Error: ' + e.message); btn.disabled = false; }
+    }
+  });
+  $('userSearch').addEventListener('input', renderUsers);
+  $('refreshUsers').addEventListener('click', loadUsers);
+
+  /* ---------- config modal ---------- */
+  async function openConfig(num){
+    $('configMsg').textContent = '';
+    $('configTitle').textContent = 'Config — ' + num;
+    const body = $('configBody');
+    body.innerHTML = '<div class="loader">loading…</div>';
+    $('configModal').classList.add('open');
+    try {
+      const d = await api('/user/config?number=' + encodeURIComponent(num));
+      const c = d.config || {};
+      const booleans = [
+        ['AUTO_VIEW_STATUS', 'Auto view status'],
+        ['AUTO_LIKE_STATUS', 'Auto like status'],
+        ['AUTO_REACT', 'Auto react'],
+        ['AUTO_RECORDING', 'Auto recording'],
+        ['AUTO_TYPING', 'Auto typing'],
+        ['AUTO_READ_MESSAGE', 'Auto read messages']
+      ];
+      const boolRow = (k, label) =>
+        '<div class="field"><label>' + label + '</label><select data-k="' + k + '">' +
+        '<option value="true"' + (String(c[k]) === 'true' ? ' selected' : '') + '>ON</option>' +
+        '<option value="false"' + (String(c[k]) !== 'true' ? ' selected' : '') + '>OFF</option>' +
+        '</select></div>';
+      const workSel =
+        '<div class="field"><label>WORK_TYPE</label><select data-k="WORK_TYPE">' +
+        ['public','private','inbox','groups'].map(w => '<option value="' + w + '"' + (c.WORK_TYPE === w ? ' selected' : '') + '>' + w + '</option>').join('') +
+        '</select></div>';
+      const emojiRow =
+        '<div class="field"><label>AUTO_LIKE_EMOJI (comma separated)</label>' +
+        '<input data-k="AUTO_LIKE_EMOJI" value="' + esc((c.AUTO_LIKE_EMOJI || []).join(',')) + '" /></div>';
+      const textRow = (k, label) =>
+        '<div class="field"><label>' + label + '</label><input data-k="' + k + '" value="' + esc(c[k] || '') + '" /></div>';
+      body.innerHTML =
+        workSel +
+        booleans.map(b => boolRow(b[0], b[1])).join('') +
+        emojiRow +
+        textRow('PREFIX', 'PREFIX') +
+        textRow('botName', 'botName');
+      window.__cfgNum = num;
+    } catch(e){ body.innerHTML = '<div class="msg err">' + esc(e.message) + '</div>'; }
+  }
+  $('configCancel').addEventListener('click', () => $('configModal').classList.remove('open'));
+  $('configSave').addEventListener('click', async () => {
+    const num = window.__cfgNum;
+    if (!num) return;
+    $('configMsg').textContent = 'saving…';
+    const cfg = {};
+    document.querySelectorAll('#configBody [data-k]').forEach(el => {
+      const k = el.dataset.k;
+      if (k === 'AUTO_LIKE_EMOJI') {
+        cfg[k] = el.value.split(',').map(x => x.trim()).filter(Boolean);
+      } else {
+        cfg[k] = el.value;
+      }
+    });
+    try {
+      const d = await post('/user/config', { number: num, config: cfg });
+      $('configMsg').className = 'msg ok';
+      $('configMsg').textContent = 'saved';
+      await loadUsers();
+    } catch(e){
+      $('configMsg').className = 'msg err';
+      $('configMsg').textContent = e.message;
+    }
+  });
+
+  /* ---------- admins ---------- */
+  async function loadAdmins(){
+    const wrap = $('adminsWrap');
+    wrap.innerHTML = '<div class="loader">loading…</div>';
+    $('adminMsg').textContent = '';
+    try {
+      const d = await api('/admins');
+      const list = d.list || [];
+      if (!list.length) { wrap.innerHTML = '<div class="loader">no admins</div>'; return; }
+      wrap.innerHTML =
+        '<table><thead><tr><th>JID</th><th>Actions</th></tr></thead><tbody>' +
+        list.map(j => '<tr><td class="num">' + esc(j) + '</td><td class="actions-cell">' +
+          '<button class="btn btn-sm btn-danger" data-jid="' + esc(j) + '">Remove</button></td></tr>').join('') +
+        '</tbody></table>';
+    } catch(e){ wrap.innerHTML = '<div class="msg err">' + esc(e.message) + '</div>'; }
+  }
+  $('addAdminBtn').addEventListener('click', async () => {
+    const jid = $('adminJid').value.trim();
+    if (!jid) return;
+    $('adminMsg').textContent = 'adding…';
+    try {
+      await post('/admin/add', { jid });
+      $('adminMsg').className = 'msg ok';
+      $('adminMsg').textContent = 'added';
+      $('adminJid').value = '';
+      await loadAdmins();
+    } catch(e){ $('adminMsg').className = 'msg err'; $('adminMsg').textContent = e.message; }
+  });
+  $('adminsWrap').addEventListener('click', async e => {
+    const btn = e.target.closest('button[data-jid]');
+    if (!btn) return;
+    if (!confirm('Remove admin ' + btn.dataset.jid + '?')) return;
+    try {
+      await post('/admin/remove', { jid: btn.dataset.jid });
+      await loadAdmins();
+    } catch(e){ alert('Error: ' + e.message); }
+  });
+
+  /* ---------- mongo ---------- */
+  async function loadCollections(){
+    $('colMsg').textContent = '';
+    try {
+      const d = await api('/collections');
+      collections = d.collections || [];
+      const sel = $('colSelect');
+      const cur = sel.value;
+      sel.innerHTML = '<option value="">— choose —</option>' +
+        collections.map(c => '<option value="' + esc(c.name) + '">' + esc(c.name) + ' (' + c.count + ')</option>').join('');
+      if (cur && collections.some(c => c.name === cur)) sel.value = cur;
+      if (cur) { selCol = cur; loadDocs(0); }
+    } catch(e){ $('colMsg').className = 'msg err'; $('colMsg').textContent = e.message; }
+  }
+  $('colRefresh').addEventListener('click', loadCollections);
+  $('colSelect').addEventListener('change', () => {
+    selCol = $('colSelect').value;
+    if (selCol) { loadDocs(0); } else { $('colDocsWrap').innerHTML = '<div class="loader">select a collection</div>'; $('colPager').style.display = 'none'; $('colTitle').textContent = '—'; }
+  });
+
+  async function loadDocs(skip){
+    if (!selCol) return;
+    colSkip = Math.max(0, skip);
+    $('colDocsWrap').innerHTML = '<div class="loader">loading…</div>';
+    $('colTitle').textContent = selCol;
+    try {
+      const d = await api('/collections/' + encodeURIComponent(selCol) + '?skip=' + colSkip + '&limit=' + colLimit);
+      colTotal = d.total;
+      const docs = d.docs || [];
+      $('colPager').style.display = 'flex';
+      $('pageInfo').textContent = (colSkip + 1) + '–' + (colSkip + docs.length) + ' / ' + colTotal;
+      $('prevPage').disabled = colSkip <= 0;
+      $('nextPage').disabled = colSkip + docs.length >= colTotal;
+      if (!docs.length) { $('colDocsWrap').innerHTML = '<div class="loader">empty collection</div>'; return; }
+      const keys = Object.keys(docs[0]).slice(0, 6);
+      $('colDocsWrap').innerHTML =
+        '<table><thead><tr>' +
+        keys.map(k => '<th>' + esc(k) + '</th>').join('') +
+        '<th>Actions</th></tr></thead><tbody>' +
+        docs.map(doc => {
+          const id = String(doc._id != null ? doc._id : '');
+          return '<tr>' +
+            keys.map(k => {
+              let v = doc[k];
+              if (v == null) return '<td>—</td>';
+              let s;
+              if (typeof v === 'object') { try { s = JSON.stringify(v); } catch(e){ s = String(v); } }
+              else s = String(v);
+              return '<td>' + esc(short(s, 48)) + '</td>';
+            }).join('') +
+            '<td class="actions-cell">' +
+              '<button class="btn btn-sm" data-act="view" data-id="' + esc(id) + '">View</button>' +
+              '<button class="btn btn-sm btn-danger" data-act="del" data-id="' + esc(id) + '">Del</button>' +
+            '</td></tr>';
+        }).join('') + '</tbody></table>';
+    } catch(e){ $('colDocsWrap').innerHTML = '<div class="msg err">' + esc(e.message) + '</div>'; }
+  }
+  $('prevPage').addEventListener('click', () => loadDocs(colSkip - colLimit));
+  $('nextPage').addEventListener('click', () => loadDocs(colSkip + colLimit));
+  $('colInsert').addEventListener('click', () => openDoc(null, 'insert'));
+
+  $('colDocsWrap').addEventListener('click', e => {
+    const btn = e.target.closest('button[data-act]');
+    if (!btn) return;
+    if (btn.dataset.act === 'view') openDoc(btn.dataset.id, 'view');
+    if (btn.dataset.act === 'del') {
+      if (!confirm('Delete doc ' + btn.dataset.id + '?')) return;
+      deleteDoc(btn.dataset.id);
+    }
+  });
+
+  function openDoc(id, mode){
+    docMode = mode;
+    docCol = selCol;
+    docId = id;
+    $('docMsg').textContent = '';
+    $('docTitle').textContent = mode === 'insert' ? 'Insert — ' + selCol : 'Edit — ' + selCol + ' :: ' + (id || '');
+    $('docModal').classList.add('open');
+    if (mode === 'insert') { $('docJson').value = '{\n  \n}'; return; }
+    $('docJson').value = 'loading…';
+    api('/collections/' + encodeURIComponent(selCol) + '/' + encodeURIComponent(id))
+      .then(d => { $('docJson').value = JSON.stringify(d.doc, null, 2); })
+      .catch(e => { $('docMsg').className = 'msg err'; $('docMsg').textContent = e.message; });
+  }
+
+  $('docCancel').addEventListener('click', () => $('docModal').classList.remove('open'));
+  $('docSave').addEventListener('click', async () => {
+    let doc;
+    try { doc = JSON.parse($('docJson').value); }
+    catch(e){ $('docMsg').className = 'msg err'; $('docMsg').textContent = 'Invalid JSON: ' + e.message; return; }
+    $('docMsg').textContent = 'saving…';
+    try {
+      if (docMode === 'insert') {
+        await post('/collections/' + encodeURIComponent(docCol), { doc });
+      } else {
+        await api('/collections/' + encodeURIComponent(docCol) + '/' + encodeURIComponent(docId), {
+          method: 'PUT', body: JSON.stringify({ doc })
+        });
+      }
+      $('docMsg').className = 'msg ok';
+      $('docMsg').textContent = 'saved';
+      setTimeout(() => $('docModal').classList.remove('open'), 600);
+      await loadDocs(colSkip);
+      await loadCollections();
+    } catch(e){ $('docMsg').className = 'msg err'; $('docMsg').textContent = e.message; }
+  });
+  $('docDelete').addEventListener('click', async () => {
+    if (!docId || docMode === 'insert') return;
+    if (!confirm('Delete doc?')) return;
+    try {
+      await api('/collections/' + encodeURIComponent(docCol) + '/' + encodeURIComponent(docId), { method: 'DELETE' });
+      $('docModal').classList.remove('open');
+      await loadDocs(colSkip);
+      await loadCollections();
+    } catch(e){ $('docMsg').className = 'msg err'; $('docMsg').textContent = e.message; }
+  });
+
+  /* ---------- actions ---------- */
+  $('connectAllBtn').addEventListener('click', async () => {
+    $('actionMsg').className = 'msg';
+    $('actionMsg').textContent = 'starting…';
+    try {
+      const d = await post('/connect-all');
+      $('actionMsg').className = 'msg ok';
+      $('actionMsg').textContent = 'started ' + d.started + ' / ' + d.total;
+    } catch(e){ $('actionMsg').className = 'msg err'; $('actionMsg').textContent = e.message; }
+  });
+  $('clearAllBtn').addEventListener('click', async () => {
+    if (!confirm('⚠️ Delete ALL sessions from Mongo + disk? This cannot be undone.')) return;
+    if (!confirm('Really sure?')) return;
+    $('actionMsg').className = 'msg';
+    $('actionMsg').textContent = 'clearing…';
+    try {
+      const d = await post('/clear-all');
+      $('actionMsg').className = 'msg ok';
+      $('actionMsg').textContent = 'cleared ' + d.sessions + ' sessions, ' + d.numbers + ' numbers';
+    } catch(e){ $('actionMsg').className = 'msg err'; $('actionMsg').textContent = e.message; }
+  });
+  $('restartBtn').addEventListener('click', async () => {
+    if (!confirm('Restart the process?')) return;
+    try {
+      await post('/restart');
+      alert('Restarting…');
+    } catch(e){ alert('Error: ' + e.message); }
+  });
+
+  /* ---------- boot ---------- */
+  tryBoot().then(ok => { if (!ok) showLogin(); });
+
+})();
+</script>
+</body>
+</html>
