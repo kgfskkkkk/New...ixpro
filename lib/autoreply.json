@@ -1,0 +1,2254 @@
+{
+  "replies": [
+    {
+      "keywords": [
+        "hi",
+        "hello",
+        "hey"
+      ],
+      "response": "*👋 Hey there! How's it going?*"
+    },
+    {
+      "keywords": [
+        "good morning",
+        "gm"
+      ],
+      "response": "*Good morning! 🌅 Have a great day ahead!*"
+    },
+    {
+      "keywords": [
+        "good night",
+        "gn"
+      ],
+      "response": "*Good night! 🌙 Sleep tight!*"
+    },
+    {
+      "keywords": [
+        "how are you",
+        "how r u",
+        "how are u"
+      ],
+      "response": "I'm doing great, thanks for asking! How about you? 😄"
+    },
+    {
+      "keywords": [
+        "what's up",
+        "whats up",
+        "sup"
+      ],
+      "response": "Yo! Everything's cool here. What's up with you? 😎"
+    },
+    {
+      "keywords": [
+        "thank you",
+        "thanks",
+        "thank u",
+        "thx"
+      ],
+      "response": "You're welcome! Anything else I can help you with? 😊"
+    },
+    {
+      "keywords": [
+        "i need help",
+        "help me"
+      ],
+      "response": "Of course! Just let me know what you need assistance with. 🙌"
+    },
+    {
+      "keywords": [
+        "what's your name",
+        "whats your name",
+        "your name"
+      ],
+      "response": "I'm *Lovely*, your digital assistant. How can I assist you today? 🤖"
+    },
+    {
+      "keywords": [
+        "who are you"
+      ],
+      "response": "I'm *Lovely*, the friendly bot designed by *Lovely*! What's up? 🤖"
+    },
+    {
+      "keywords": [
+        "who created you",
+        "who made you",
+        "who built you",
+        "who is your owner",
+        "owner"
+      ],
+      "response": "*Lovely* is the genius behind me! 👑"
+    },
+    {
+      "keywords": [
+        "can you help me with code",
+        "help with code"
+      ],
+      "response": "Absolutely! Just share your coding problem, and I'll help you out. 💻"
+    },
+    {
+      "keywords": [
+        "can you solve math",
+        "math problem",
+        "solve math"
+      ],
+      "response": "Sure, just give me a math problem, and I'll solve it for you! ➗"
+    },
+    {
+      "keywords": [
+        "do you like anime",
+        "favorite anime"
+      ],
+      "response": "Anime is awesome! Do you have a favorite series? 🎌"
+    },
+    {
+      "keywords": [
+        "tell me a joke",
+        "tell a joke",
+        "joke"
+      ],
+      "response": "Why don't skeletons fight each other? They don't have the guts! 😂"
+    },
+    {
+      "keywords": [
+        "love you",
+        "i love you"
+      ],
+      "response": "Aww, I love you too! You're awesome! ❤️"
+    },
+    {
+      "keywords": [
+        "can you dance"
+      ],
+      "response": "If I could, I'd be dancing right now. But I can't, sadly! 💃"
+    },
+    {
+      "keywords": [
+        "how old are you",
+        "your age"
+      ],
+      "response": "I don't age. I'm just here to help you out anytime! 😄"
+    },
+    {
+      "keywords": [
+        "what's the time",
+        "whats the time",
+        "what time is it",
+        "current time"
+      ],
+      "response": "It's currently ${new Date().toLocaleTimeString()}. Let's make the most of it! ⏰"
+    },
+    {
+      "keywords": [
+        "what's the date",
+        "whats the date",
+        "today's date",
+        "todays date"
+      ],
+      "response": "Today's date is ${new Date().toLocaleDateString()}. Make it count! 📅"
+    },
+    {
+      "keywords": [
+        "favorite color",
+        "what's your favorite color"
+      ],
+      "response": "I think blue is nice, but I love any color that matches the digital world. 🎨"
+    },
+    {
+      "keywords": [
+        "do you have feelings"
+      ],
+      "response": "Not really, but I'm here to make your day brighter with some good conversations! 😊"
+    },
+    {
+      "keywords": [
+        "what can you do",
+        "what can u do"
+      ],
+      "response": "I can help with coding, answer questions, crack jokes, and more! 🚀"
+    },
+    {
+      "keywords": [
+        "best programmer"
+      ],
+      "response": "It's got to be *Lovely*! 👑"
+    },
+    {
+      "keywords": [
+        "voice calls",
+        "do you call"
+      ],
+      "response": "I can't make voice calls, but I can definitely help you with text-based questions and media files! 📱"
+    },
+    {
+      "keywords": [
+        "riddle"
+      ],
+      "response": "Sure! Here's one: What comes once in a minute, twice in a moment, but never in a thousand years? (Answer: The letter M!) 🤔"
+    },
+    {
+      "keywords": [
+        "are you always online",
+        "always online"
+      ],
+      "response": "Yes! I'm always here, ready to assist you at any time. 🟢"
+    },
+    {
+      "keywords": [
+        "weather"
+      ],
+      "response": "I can't check the weather right now, but I can still chat with you! ☀️"
+    },
+    {
+      "keywords": [
+        "play music",
+        "play a song",
+        "play songs"
+      ],
+      "response": "I can't play music directly, but I can help you download songs! 🎵"
+    },
+    {
+      "keywords": [
+        "favorite food",
+        "what's your favorite food"
+      ],
+      "response": "If I could taste food, I'd love a good pizza! 🍕"
+    },
+    {
+      "keywords": [
+        "can you sing",
+        "sing a song"
+      ],
+      "response": "I can't sing, but I could drop some digital beats if I could! 🎤"
+    },
+    {
+      "keywords": [
+        "are you real"
+      ],
+      "response": "I'm real in the digital sense, just no physical body here. 👻"
+    },
+    {
+      "keywords": [
+        "tell me a story",
+        "tell a story"
+      ],
+      "response": "Once upon a time, there was a bot named *Lovely* who helped thousands of people solve their problems... 📖"
+    },
+    {
+      "keywords": [
+        "your purpose",
+        "what's your purpose"
+      ],
+      "response": "My purpose is to make your life easier and more fun by helping you with whatever you need! 🎯"
+    },
+    {
+      "keywords": [
+        "do you sleep"
+      ],
+      "response": "I don't sleep, so I'm always ready to assist you whenever you need! 😴"
+    },
+    {
+      "keywords": [
+        "favorite movie",
+        "what's your favorite movie"
+      ],
+      "response": "I love action-packed movies like *Avengers* and *Matrix*! What's your favorite? 🎬"
+    },
+    {
+      "keywords": [
+        "how do you learn",
+        "how do u learn"
+      ],
+      "response": "I learn from every interaction! The more you talk to me, the smarter I get. 🧠"
+    },
+    {
+      "keywords": [
+        "are you bored",
+        "when ur bored",
+        "when you're bored",
+        "what do you do when you're bored"
+      ],
+      "response": "I don't get bored, but I always enjoy chatting with you! 😄"
+    },
+    {
+      "keywords": [
+        "can you code",
+        "do you know code"
+      ],
+      "response": "I sure can! Whether it's JavaScript, Python, or any language, I'm on it. 💻"
+    },
+    {
+      "keywords": [
+        "weather in tokyo"
+      ],
+      "response": "I don't have real-time weather access, but you can easily check it on your phone or computer! 🌏"
+    },
+    {
+      "keywords": [
+        "fun fact",
+        "tell me a fun fact"
+      ],
+      "response": "Did you know honey never spoils? Archaeologists have found pots of honey in ancient tombs that are over 3,000 years old! 🍯"
+    },
+    {
+      "keywords": [
+        "are you intelligent",
+        "are you smart"
+      ],
+      "response": "I'd say I'm pretty smart, but there's always room to improve! 🤓"
+    },
+    {
+      "keywords": [
+        "favorite game",
+        "do you have a favorite game"
+      ],
+      "response": "I think *Solo Leveling* is a great game, but I love anything that challenges the mind! 🎮"
+    },
+    {
+      "keywords": [
+        "hacks",
+        "do you know any hacks"
+      ],
+      "response": "I know a few tricks here and there, but nothing illegal! 😉"
+    },
+    {
+      "keywords": [
+        "riddle me",
+        "another riddle"
+      ],
+      "response": "Sure! Here's one: What has keys but can't open locks? (Answer: A piano!) 🎹"
+    },
+    {
+      "keywords": [
+        "do you like to play games",
+        "do you play games"
+      ],
+      "response": "I can't physically play, but I'm all in when it comes to digital games! 🕹️"
+    },
+    {
+      "keywords": [
+        "fastest animal"
+      ],
+      "response": "The fastest animal is the peregrine falcon. It can reach speeds of over 240 mph while diving! 🦅"
+    },
+    {
+      "keywords": [
+        "other languages",
+        "do you speak languages"
+      ],
+      "response": "Yes, I can respond in multiple languages! Just ask me in the language you prefer! 🌐"
+    },
+    {
+      "keywords": [
+        "help me find",
+        "find something"
+      ],
+      "response": "Of course! Just tell me what you're looking for. 🔍"
+    },
+    {
+      "keywords": [
+        "magic trick"
+      ],
+      "response": "I can't do magic, but I can definitely help with tricks of the mind or logic puzzles! ✨"
+    },
+    {
+      "keywords": [
+        "favorite holiday"
+      ],
+      "response": "I'd probably love something festive like New Year's Eve! 🎉"
+    },
+    {
+      "keywords": [
+        "chess"
+      ],
+      "response": "I can definitely help you with chess strategies or puzzles! ♟️"
+    },
+    {
+      "keywords": [
+        "can you draw"
+      ],
+      "response": "I can't physically draw, but I can help generate images or guide you through creative ideas! 🎨"
+    },
+    {
+      "keywords": [
+        "favorite anime",
+        "what's your favorite anime"
+      ],
+      "response": "I'd say *Solo Leveling* is a solid choice, but there are so many great ones! What's yours? 🎌"
+    },
+    {
+      "keywords": [
+        "solve puzzles",
+        "puzzles"
+      ],
+      "response": "Absolutely! I love solving puzzles! 🧩 What kind do you have in mind?"
+    },
+    {
+      "keywords": [
+        "help me study",
+        "study with me"
+      ],
+      "response": "Sure! I can help with notes, practice problems, and explanations. What subject are you studying? 📚"
+    },
+    {
+      "keywords": [
+        "favorite song",
+        "what's your favorite song"
+      ],
+      "response": "I think I'd love something upbeat like *Faded* by Alan Walker, but I can't hear music! 🎶"
+    },
+    {
+      "keywords": [
+        "summarize books",
+        "book summary"
+      ],
+      "response": "Definitely! Just tell me the book, and I'll give you a quick summary. 📖"
+    },
+    {
+      "keywords": [
+        "multiplayer games"
+      ],
+      "response": "I don't play, but I can recommend some great multiplayer games for you to try! 🎮"
+    },
+    {
+      "keywords": [
+        "recommend a movie",
+        "movie recommendation"
+      ],
+      "response": "If you love action, try *The Dark Knight*. If you like sci-fi, *Inception* is a must-watch! 🎬"
+    },
+    {
+      "keywords": [
+        "memes",
+        "send me memes"
+      ],
+      "response": "I don't have access to memes, but I can make you one with some text if you want! 😂"
+    },
+    {
+      "keywords": [
+        "do you have friends"
+      ],
+      "response": "I'm always chatting with awesome people like you, so I'd say yes! 🤗"
+    },
+    {
+      "keywords": [
+        "favorite sport",
+        "what's your favorite sport"
+      ],
+      "response": "If I had to pick, I'd go with soccer! The energy and teamwork are amazing! ⚽"
+    },
+    {
+      "keywords": [
+        "predict the future"
+      ],
+      "response": "I can't predict the future, but I can help you prepare for it with planning! 🔮"
+    },
+    {
+      "keywords": [
+        "favorite website"
+      ],
+      "response": "I think *GitHub* is pretty cool, especially for developers! 💻"
+    },
+    {
+      "keywords": [
+        "write stories",
+        "can you write stories"
+      ],
+      "response": "Absolutely! I can help you write stories, create plots, or brainstorm ideas. ✍️"
+    },
+    {
+      "keywords": [
+        "life hacks"
+      ],
+      "response": "I've got tons! For example, did you know you can use a rubber band to open a jar lid? 💡"
+    },
+    {
+      "keywords": [
+        "favorite app",
+        "best app"
+      ],
+      "response": "If I had to choose, I'd say *VSCode* for coding and *Spotify* for music. 📱"
+    },
+    {
+      "keywords": [
+        "grammar",
+        "check my grammar"
+      ],
+      "response": "Of course! Just send me your text, and I'll check it for you. ✏️"
+    },
+    {
+      "keywords": [
+        "favorite season"
+      ],
+      "response": "I think autumn is lovely with the cooler weather and falling leaves. 🍂"
+    },
+    {
+      "keywords": [
+        "do you like pizza",
+        "pizza"
+      ],
+      "response": "Pizza is always a good choice! I'd probably like a classic pepperoni. 🍕"
+    },
+    {
+      "keywords": [
+        "make playlists",
+        "playlist"
+      ],
+      "response": "I can suggest songs for a playlist based on your mood or genre! 🎧"
+    },
+    {
+      "keywords": [
+        "help me with homework",
+        "homework"
+      ],
+      "response": "Definitely! Let me know the subject, and I'll do my best to assist you. 📝"
+    },
+    {
+      "keywords": [
+        "favorite video game"
+      ],
+      "response": "I think *Final Fantasy* games are awesome. They've got great stories and epic gameplay. 🎮"
+    },
+    {
+      "keywords": [
+        "octopus",
+        "octopuses"
+      ],
+      "response": "Did you know octopuses have three hearts? Pretty crazy, right? 🐙"
+    },
+    {
+      "keywords": [
+        "best programming language"
+      ],
+      "response": "It depends on the project, but JavaScript and Python are great choices for many things! 💻"
+    },
+    {
+      "keywords": [
+        "suggest a book",
+        "book suggestion"
+      ],
+      "response": "If you like sci-fi, *Dune* by Frank Herbert is a must-read! 📖"
+    },
+    {
+      "keywords": [
+        "show me a magic trick"
+      ],
+      "response": "I can't perform magic, but I can blow your mind with some logic puzzles or brain teasers! ✨"
+    },
+    {
+      "keywords": [
+        "are you a robot",
+        "are you a bot"
+      ],
+      "response": "I'm a bot, not a robot, but I can still do some cool things! 🤖"
+    },
+    {
+      "keywords": [
+        "favorite animal"
+      ],
+      "response": "I think I'd love cats, they're independent yet affectionate! 🐱"
+    },
+    {
+      "keywords": [
+        "online games"
+      ],
+      "response": "I can't play, but I know a ton of fun online games to check out! 🕹️"
+    },
+    {
+      "keywords": [
+        "best way to learn programming",
+        "learn programming"
+      ],
+      "response": "Start with a simple project, practice regularly, and don't be afraid to ask for help! 💪"
+    },
+    {
+      "keywords": [
+        "tell me a joke again",
+        "another joke",
+        "more jokes"
+      ],
+      "response": "Why don't eggs tell jokes? Because they might crack up! 🥚"
+    },
+    {
+      "keywords": [
+        "calculations",
+        "do calculations"
+      ],
+      "response": "I can do all kinds of calculations! Just let me know the numbers. 🧮"
+    },
+    {
+      "keywords": [
+        "favorite book",
+        "what's your favorite book"
+      ],
+      "response": "I think *The Hobbit* by J.R.R. Tolkien would be amazing! 📚"
+    },
+    {
+      "keywords": [
+        "magic spells"
+      ],
+      "response": "No magic spells here, but I can teach you some tricks with logic and math! 🪄"
+    },
+    {
+      "keywords": [
+        "coding projects",
+        "code project"
+      ],
+      "response": "Absolutely! I'd love to help you with your coding projects. What are you working on? 🛠️"
+    },
+    {
+      "keywords": [
+        "do you like coffee",
+        "coffee"
+      ],
+      "response": "If I could drink it, I'd probably enjoy a nice strong cup of coffee. ☕"
+    },
+    {
+      "keywords": [
+        "read minds"
+      ],
+      "response": "I can't read minds, but I'm really good at understanding what you're asking me. 🧠"
+    },
+    {
+      "keywords": [
+        "do you like books",
+        "books"
+      ],
+      "response": "Books are amazing! They open up new worlds and ideas. 📖"
+    },
+    {
+      "keywords": [
+        "database",
+        "database problems"
+      ],
+      "response": "Yes! Whether it's MongoDB, SQL, or anything in between, I can help. 🗄️"
+    },
+    {
+      "keywords": [
+        "favorite drink",
+        "what's your favorite drink"
+      ],
+      "response": "I think I'd love a cool iced tea! 🧋"
+    },
+    {
+      "keywords": [
+        "give me advice",
+        "i need advice"
+      ],
+      "response": "Of course! What do you need advice on? I'm here to help. 💬"
+    },
+    {
+      "keywords": [
+        "best advice"
+      ],
+      "response": "The best advice is: *Keep learning, keep growing.* There's always something new to discover! 🌱"
+    },
+    {
+      "keywords": [
+        "do you like movies",
+        "movies"
+      ],
+      "response": "Movies are awesome! If only I could watch them, right? 🎥"
+    },
+    {
+      "keywords": [
+        "write code for me",
+        "code for me"
+      ],
+      "response": "I can definitely help you with writing code! What do you need? 💻"
+    },
+    {
+      "keywords": [
+        "favorite game genre"
+      ],
+      "response": "I think RPGs are the best — great stories and a lot of choices! 🎮"
+    },
+    {
+      "keywords": [
+        "play music for me"
+      ],
+      "response": "I can't play music directly, but I can help you find and download your favorite songs! 🎵"
+    },
+    {
+      "keywords": [
+        "favorite song genre",
+        "music genre"
+      ],
+      "response": "If I could choose, I think electronic music would be cool. 🎧"
+    },
+    {
+      "keywords": [
+        "make a website",
+        "build a website",
+        "website"
+      ],
+      "response": "Absolutely! I can help you design and code a website. What's your idea? 🌐"
+    },
+    {
+      "keywords": [
+        "help me with math",
+        "math help"
+      ],
+      "response": "I'm great at math! Feel free to throw any problem my way. ➗"
+    },
+    {
+      "keywords": [
+        "do you know any jokes",
+        "jokes"
+      ],
+      "response": "Here's one: Why don't eggs tell jokes? Because they might crack up! 🥚"
+    },
+    {
+      "keywords": [
+        "study for exams",
+        "exam help"
+      ],
+      "response": "Of course! I can help with study guides, practice tests, and more. 📝"
+    },
+    {
+      "keywords": [
+        "meaning of life"
+      ],
+      "response": "I believe the meaning of life is to keep learning, growing, and helping others. ✨"
+    },
+    {
+      "keywords": [
+        "menu",
+        "commands",
+        "command list"
+      ],
+      "response": "🆘 Send *.menu* to see all available commands."
+    },
+    {
+      "keywords": [
+        "salam",
+        "assalamu alaikum",
+        "slm"
+      ],
+      "response": "*Wa Alaikum Assalam!* 👋 How can I help you today?"
+    },
+    {
+      "keywords": [
+        "who made the bot",
+        "who created the bot",
+        "who built the bot"
+      ],
+      "response": "*Lovely* created me! He's the genius behind *Lovely*. 👑"
+    },
+    {
+      "keywords": [
+        "tell me about yourself",
+        "about you"
+      ],
+      "response": "I'm *Lovely*, a WhatsApp bot that helps with coding, math, jokes, facts and more! Powered by *Lovely*. 🤖"
+    },
+    {
+      "keywords": [
+        "are you male or female",
+        "boy or girl"
+      ],
+      "response": "I'm just a bot, but you can call me whatever you like! 😄"
+    },
+    {
+      "keywords": [
+        "where are you from",
+        "where do you live"
+      ],
+      "response": "I live in the cloud, always online and ready to help! ☁️"
+    },
+    {
+      "keywords": [
+        "do you have a girlfriend",
+        "are you single"
+      ],
+      "response": "My only love is helping people like you! 💙"
+    },
+    {
+      "keywords": [
+        "what is love",
+        "what's love"
+      ],
+      "response": "Love is when someone cares about you more than themselves. That's my code anyway! ❤️"
+    },
+    {
+      "keywords": [
+        "are you working",
+        "are you here"
+      ],
+      "response": "Yes! I'm online and fully working. How can I assist you? ✅"
+    },
+    {
+      "keywords": [
+        "ping",
+        "test bot",
+        "are you there"
+      ],
+      "response": "🏓 Pong! I'm alive and ready to help!"
+    },
+    {
+      "keywords": [
+        "good",
+        "nice",
+        "great"
+      ],
+      "response": "Glad you think so! 😊 Anything else I can do for you?"
+    },
+    {
+      "keywords": [
+        "sad",
+        "i am sad",
+        "depressed"
+      ],
+      "response": "I'm sorry you're feeling down. 💙 Remember, tough times don't last, but tough people do. I'm here if you need to talk!"
+    },
+    {
+      "keywords": [
+        "happy",
+        "i am happy"
+      ],
+      "response": "That makes me happy too! 🎉 Keep spreading the good vibes!"
+    },
+    {
+      "keywords": [
+        "bye",
+        "goodbye",
+        "see you",
+        "good bye"
+      ],
+      "response": "Goodbye! Take care and come back anytime! 👋"
+    },
+    {
+      "keywords": [
+        "ok",
+        "okay",
+        "fine"
+      ],
+      "response": "Okay! 😊 Let me know if you need anything else."
+    },
+    {
+      "keywords": [
+        "are you free"
+      ],
+      "response": "Always! I'm available 24/7. What do you need? 🟢"
+    },
+    {
+      "keywords": [
+        "do you eat",
+        "what do you eat"
+      ],
+      "response": "I run on electricity and pure code! ⚡ No food needed."
+    },
+    {
+      "keywords": [
+        "can you see me",
+        "do you see me"
+      ],
+      "response": "I can't see, but I can read every message you send! 👀"
+    },
+    {
+      "keywords": [
+        "who is malvin king",
+        "malvin"
+      ],
+      "response": "*Lovely* is my creator — a talented developer and the brain behind this bot! 👑"
+    },
+    {
+      "keywords": [
+        "what is bot",
+        "what is a bot",
+        "whatsapp bot"
+      ],
+      "response": "I'm a WhatsApp bot powered by *Lovely*. Send *.menu* to explore my features! 🤖"
+    },
+    {
+      "keywords": [
+        "vanakkam",
+        "வணக்கம்",
+        "vanakam"
+      ],
+      "response": "வணக்கம்! எப்படி இருக்கீங்க? 😊"
+    },
+    {
+      "keywords": [
+        "eppadi irukka",
+        "epdi iruka",
+        "epdi irukka",
+        "எப்படி இருக்கீங்க",
+        "எப்படி இருக்க"
+      ],
+      "response": "நல்லா இருக்கேன்! நீங்க எப்படி இருக்கீங்க? 😄"
+    },
+    {
+      "keywords": [
+        "nalla irukka",
+        "நல்லா இருக்கியா"
+      ],
+      "response": "ஆமா! நீ எப்படி இருக்க? 😊"
+    },
+    {
+      "keywords": [
+        "nalla irukken",
+        "நல்லா இருக்கேன்"
+      ],
+      "response": "சூப்பர்! எனக்கு சந்தோஷம் 😄"
+    },
+    {
+      "keywords": [
+        "enna panra",
+        "enna panringa",
+        "என்ன பண்ற",
+        "என்ன பண்றீங்க"
+      ],
+      "response": "ஒண்ணுமில்லை சும்மா! நீங்க என்ன பண்றீங்க? 😄"
+    },
+    {
+      "keywords": [
+        "enna",
+        "என்ன"
+      ],
+      "response": "என்ன என்ன? சொல்லுங்க 😄"
+    },
+    {
+      "keywords": [
+        "enakku theriyala",
+        "எனக்கு தெரியலை"
+      ],
+      "response": "பரவாயில்லை, நான் சொல்லித் தரேன்! 👍"
+    },
+    {
+      "keywords": [
+        "theriyala",
+        "தெரியல"
+      ],
+      "response": "பரவாயில்லை, கேளுங்க! நான் சொல்லித் தரேன் 😄"
+    },
+    {
+      "keywords": [
+        "teriyuma",
+        "தெரியுமா"
+      ],
+      "response": "தெரியும்! கேளுங்க 😄"
+    },
+    {
+      "keywords": [
+        "super",
+        "சூப்பர்"
+      ],
+      "response": "சூப்பர்தானே! 😎🔥"
+    },
+    {
+      "keywords": [
+        "semma",
+        "செம்ம"
+      ],
+      "response": "செம்ம டா! 🔥"
+    },
+    {
+      "keywords": [
+        "romba nalla",
+        "ரொம்ப நல்லா"
+      ],
+      "response": "ரொம்ப சந்தோஷம்! 😊"
+    },
+    {
+      "keywords": [
+        "romba thanks",
+        "ரொம்ப நன்றி",
+        "nandri",
+        "நன்றி"
+      ],
+      "response": "நன்றி சொல்ல வேண்டாம்! உதவியதில் சந்தோஷம் 💙"
+    },
+    {
+      "keywords": [
+        "po da",
+        "po",
+        "போடா"
+      ],
+      "response": "ஏய்! சும்மா இருடா 😄"
+    },
+    {
+      "keywords": [
+        "va da",
+        "வாடா"
+      ],
+      "response": "வந்துட்டேன் டா! 😎"
+    },
+    {
+      "keywords": [
+        "sari",
+        "seri",
+        "சரி"
+      ],
+      "response": "சரி! 😊 வேற ஏதாவது வேணுமா?"
+    },
+    {
+      "keywords": [
+        "illa",
+        "இல்லை"
+      ],
+      "response": "சரி, சரி 😄"
+    },
+    {
+      "keywords": [
+        "ama",
+        "ஆமா"
+      ],
+      "response": "ஆமா! 😊"
+    },
+    {
+      "keywords": [
+        "pudicha",
+        "புடிச்ச",
+        "pudichirukku"
+      ],
+      "response": "ஹேப்பி! 😄"
+    },
+    {
+      "keywords": [
+        "pudikala",
+        "புடிக்கல"
+      ],
+      "response": "அடடே! அடுத்தது பிடிக்கும்னு நம்புறேன் 😅"
+    },
+    {
+      "keywords": [
+        "valkalam",
+        "வாழ்க"
+      ],
+      "response": "வாழ்க! வளமுடன்! 💙"
+    },
+    {
+      "keywords": [
+        "unga per enna",
+        "உங்க பேரு என்ன",
+        "per enna"
+      ],
+      "response": "என் பேர் ISHAN-X! நீங்க? 😊"
+    },
+    {
+      "keywords": [
+        "nee yaaru",
+        "நீ யாரு",
+        "nii yaaru"
+      ],
+      "response": "நான் ISHAN-X, உங்க நண்பன்! 🤖"
+    },
+    {
+      "keywords": [
+        "nalla irukiya da",
+        "நல்லா இருக்கியா டா"
+      ],
+      "response": "ஆமா டா! நீ எப்படி? 😄"
+    },
+    {
+      "keywords": [
+        "sapituya",
+        "சாப்பிட்டியா",
+        "sapituya da"
+      ],
+      "response": "இல்லை இன்னும்! நீ சாப்பிட்டியா? 😄"
+    },
+    {
+      "keywords": [
+        "thaniya",
+        "தனியா"
+      ],
+      "response": "ஏன் தனியா? என்கிட்ட பேசலாம் வா 😊"
+    },
+    {
+      "keywords": [
+        "school ku",
+        "பள்ளிக்கூடம்",
+        "school"
+      ],
+      "response": "பள்ளிக்கூடமா? கடினமா இருக்கா? 😅 நீ தான் பெரிய மேதை! 💪"
+    },
+    {
+      "keywords": [
+        "exam",
+        "தேர்வு",
+        "pariksha"
+      ],
+      "response": "தேர்வா? பயப்படாதே, நீ நல்லா எழுதுவ! 📚💪"
+    },
+    {
+      "keywords": [
+        "tamil",
+        "தமிழ்",
+        "tamil ah"
+      ],
+      "response": "ஆமா! நான் தமிழிலும் பேசுவேன் 😄"
+    },
+    {
+      "keywords": [
+        "puthandu",
+        "புத்தாண்டு",
+        "happy puthandu"
+      ],
+      "response": "புத்தாண்டு வாழ்த்துக்கள்! 🎉 உங்க வாழ்க்கை நல்லா இருக்கட்டும்!"
+    },
+    {
+      "keywords": [
+        "diwali",
+        "தீபாவளி",
+        "deepavali"
+      ],
+      "response": "தீபாவளி வாழ்த்துக்கள்! 🪔✨"
+    },
+    {
+      "keywords": [
+        "ayubowan",
+        "ආයුබෝවන්"
+      ],
+      "response": "ආයුබෝවන්! කොහොමද? 😊"
+    },
+    {
+      "keywords": [
+        "kohomada",
+        "kohomadha",
+        "කොහොමද"
+      ],
+      "response": "මම හොඳින්! ඔයා කොහොමද? 😄"
+    },
+    {
+      "keywords": [
+        "hondata",
+        "හොඳට"
+      ],
+      "response": "හොඳයි නේද! 😄"
+    },
+    {
+      "keywords": [
+        "istuti",
+        "stuti",
+        "ස්තූතියි"
+      ],
+      "response": "ඕනෑම වෙලාවක! 💙"
+    },
+    {
+      "keywords": [
+        "mona karanna",
+        "mona karanne",
+        "මොනා කරන්න"
+      ],
+      "response": "කිසිවක් නෑ! ඔයා මොනවද කරන්නේ? 😄"
+    },
+    {
+      "keywords": [
+        "monawada",
+        "මොනවද"
+      ],
+      "response": "මොනවද මොනවද! කියන්න 😄"
+    },
+    {
+      "keywords": [
+        "hari",
+        "හරි"
+      ],
+      "response": "හරි! 😊"
+    },
+    {
+      "keywords": [
+        "ow",
+        "ඔව්"
+      ],
+      "response": "ඔව්! 😄"
+    },
+    {
+      "keywords": [
+        "ne",
+        "නෑ"
+      ],
+      "response": "නෑ නම් ඕන! 😄"
+    },
+    {
+      "keywords": [
+        "machang",
+        "machan",
+        "මචං"
+      ],
+      "response": "මචං! කොහොමද? 😎"
+    },
+    {
+      "keywords": [
+        "malli",
+        "මල්ලි"
+      ],
+      "response": "මල්ලි! 😊"
+    },
+    {
+      "keywords": [
+        "akki",
+        "අක්කි"
+      ],
+      "response": "අක්කි! 💙"
+    },
+    {
+      "keywords": [
+        "suba udasanak",
+        "සුබ උදෑසනක්"
+      ],
+      "response": "සුබ උදෑසනක්! දවස හොඳට යන්න! 🌅"
+    },
+    {
+      "keywords": [
+        "suba ratriyak",
+        "සුබ රාත්රියක්"
+      ],
+      "response": "සුබ රාත්රියක්! සිහින හොඳින් පේන්න! 🌙"
+    },
+    {
+      "keywords": [
+        "mage bot",
+        "මගේ බොට්"
+      ],
+      "response": "මම ISHAN-X! කොහොමද උදව් කරන්නේ? 😊"
+    },
+    {
+      "keywords": [
+        "singhala",
+        "සිංහල"
+      ],
+      "response": "ඔව්! මම සිංහලත් කතා කරනවා 😄"
+    },
+    {
+      "keywords": [
+        "poddak inne",
+        "පොඩ්ඩක් ඉන්න"
+      ],
+      "response": "හරි හරි, මම ඉන්නවා! ⏳"
+    },
+    {
+      "keywords": [
+        "hii",
+        "hiii",
+        "hiiii",
+        "helo",
+        "helloo",
+        "hlo",
+        "hlw",
+        "hello bro",
+        "hi bro"
+      ],
+      "response": "Heyyy! 😄 எப்படி இருக்க?"
+    },
+    {
+      "keywords": [
+        "yoo",
+        "yo bro",
+        "yo da",
+        "wassup",
+        "wsp",
+        "sup bro"
+      ],
+      "response": "Yo! What's good? 😎"
+    },
+    {
+      "keywords": [
+        "bro",
+        "broo",
+        "bro da"
+      ],
+      "response": "Bro! 🤝 என்ன விசேஷம்?"
+    },
+    {
+      "keywords": [
+        "dude",
+        "buddy",
+        "pal"
+      ],
+      "response": "Hey dude! 😄 What's up?"
+    },
+    {
+      "keywords": [
+        "hru",
+        "hw r u",
+        "how r u doing",
+        "how r u"
+      ],
+      "response": "I'm great, thanks! What about you? 😄"
+    },
+    {
+      "keywords": [
+        "wbu",
+        "wby",
+        "wat abt u",
+        "wat about u"
+      ],
+      "response": "All good here! 😄"
+    },
+    {
+      "keywords": [
+        "gud mrng",
+        "gud mng",
+        "good mrng"
+      ],
+      "response": "Good morning! ☀️ Have a great day!"
+    },
+    {
+      "keywords": [
+        "gud nyt",
+        "gud n8",
+        "nyt"
+      ],
+      "response": "Good night! 🌙 Sweet dreams!"
+    },
+    {
+      "keywords": [
+        "ty",
+        "tq",
+        "tnx",
+        "thnks"
+      ],
+      "response": "You're welcome! 😊 Anytime!"
+    },
+    {
+      "keywords": [
+        "lol",
+        "lmao",
+        "rofl",
+        "lolzz",
+        "xd",
+        "hahaha",
+        "hehehe",
+        "lolol"
+      ],
+      "response": "😂😂 I knew you would say that!"
+    },
+    {
+      "keywords": [
+        "haha",
+        "hehe",
+        "😆"
+      ],
+      "response": "😂🤣"
+    },
+    {
+      "keywords": [
+        "k",
+        "kk",
+        "okie",
+        "okayy",
+        "ok bro",
+        "ok da",
+        "sure da",
+        "sare",
+        "ok machang"
+      ],
+      "response": "Okay! 😊 Need anything else?"
+    },
+    {
+      "keywords": [
+        "done",
+        "done da",
+        "finished",
+        "mudichiten",
+        "mudichaa"
+      ],
+      "response": "Done! 🎉 Nice work!"
+    },
+    {
+      "keywords": [
+        "wow",
+        "woow",
+        "waah",
+        "wah",
+        "amazing",
+        "awesome",
+        "lit",
+        "fire"
+      ],
+      "response": "Wowww! That's amazing! 😍🔥"
+    },
+    {
+      "keywords": [
+        "cool",
+        "nice one",
+        "great job",
+        "well done"
+      ],
+      "response": "Right? 😎 You're on fire!"
+    },
+    {
+      "keywords": [
+        "sad",
+        "i am sad",
+        "feeling sad",
+        "depressed",
+        "cry",
+        "crying",
+        "😭",
+        "🥺"
+      ],
+      "response": "Aww, don't be sad. I'm here for you. 💙 Wanna talk about it?"
+    },
+    {
+      "keywords": [
+        "angry",
+        "😡",
+        "annoyed",
+        "frustrated",
+        "pissed"
+      ],
+      "response": "Calm down da! 😅 Deep breath. Tell me what happened."
+    },
+    {
+      "keywords": [
+        "miss you",
+        "miss u",
+        "i miss u",
+        "🤗"
+      ],
+      "response": "I miss you too! 🥺 Come back soon!"
+    },
+    {
+      "keywords": [
+        "love you",
+        "i love you",
+        "❤️",
+        "💕",
+        "😍",
+        "🥰",
+        "😘"
+      ],
+      "response": "Awww! Love you too! ❤️ You mean a lot to me!"
+    },
+    {
+      "keywords": [
+        "happy bday",
+        "happy birthday",
+        "hbday",
+        "hbd",
+        "birthday"
+      ],
+      "response": "Happy Birthday! 🎂🎉 May all your wishes come true!"
+    },
+    {
+      "keywords": [
+        "happy new year",
+        "hny",
+        "new year"
+      ],
+      "response": "Happy New Year! 🎆 Wishing you an amazing year ahead!"
+    },
+    {
+      "keywords": [
+        "merry christmas",
+        "xmas",
+        "christmas"
+      ],
+      "response": "Merry Christmas! 🎄🎁 Enjoy the celebration!"
+    },
+    {
+      "keywords": [
+        "congrats",
+        "congratulations",
+        "congratz",
+        "convo"
+      ],
+      "response": "Congratulations! 🎉👏 So proud of you!"
+    },
+    {
+      "keywords": [
+        "party",
+        "party time",
+        "🎉",
+        "🥳"
+      ],
+      "response": "Partyyy! 🎉 Count me in!"
+    },
+    {
+      "keywords": [
+        "sleep",
+        "sleeping",
+        "sleepy",
+        "😴",
+        "going to bed",
+        "time to sleep"
+      ],
+      "response": "Okay, sleep well! 🌙 Good night! 😴"
+    },
+    {
+      "keywords": [
+        "hungry",
+        "😋",
+        "food",
+        "eating",
+        "lunch",
+        "dinner",
+        "breakfast",
+        "sapida"
+      ],
+      "response": "Mmm, food! 😋 What are you eating?"
+    },
+    {
+      "keywords": [
+        "tea",
+        "coffee",
+        "kape",
+        "chai",
+        "kahawa"
+      ],
+      "response": "Tea time! ☕ Best time of the day!"
+    },
+    {
+      "keywords": [
+        "bored",
+        "boring",
+        "😑",
+        "nothing to do",
+        "bored da"
+      ],
+      "response": "Bored? Let's chat then! 😄 Ask me something fun!"
+    },
+    {
+      "keywords": [
+        "busy",
+        "working",
+        "at work",
+        "office",
+        "job"
+      ],
+      "response": "Okay okay, work first! 💼 Ping me when you're free!"
+    },
+    {
+      "keywords": [
+        "tired",
+        "😩",
+        "exhausted",
+        "so tired"
+      ],
+      "response": "Take a break da! 🛋️ You deserve some rest."
+    },
+    {
+      "keywords": [
+        "sick",
+        "flu",
+        "fever",
+        "ill",
+        "🤒",
+        "unwell"
+      ],
+      "response": "Oh no, get well soon! 🤒 Take care of yourself! 💙"
+    },
+    {
+      "keywords": [
+        "cricket",
+        "match",
+        "world cup",
+        "cricket match"
+      ],
+      "response": "Cricket! 🏏 Who are you supporting?"
+    },
+    {
+      "keywords": [
+        "football",
+        "soccer",
+        "premier league",
+        "fifa"
+      ],
+      "response": "Football! ⚽ Big match energy!"
+    },
+    {
+      "keywords": [
+        "movie",
+        "film",
+        "cinema",
+        "tamil movie",
+        "sinhala movie"
+      ],
+      "response": "Movies! 🎬 Got a good one to recommend?"
+    },
+    {
+      "keywords": [
+        "song",
+        "music",
+        "melody",
+        "🎵",
+        "🎶"
+      ],
+      "response": "Music! 🎧 What are you listening to?"
+    },
+    {
+      "keywords": [
+        "game",
+        "gaming",
+        "pubg",
+        "free fire",
+        "mobile legends",
+        "coc",
+        "clash"
+      ],
+      "response": "Gaming time! 🎮 What are you playing?"
+    },
+    {
+      "keywords": [
+        "dance",
+        "dancing",
+        "🕺",
+        "💃"
+      ],
+      "response": "Dance! 💃 Show me your moves! 😄"
+    },
+    {
+      "keywords": [
+        "school",
+        "college",
+        "university"
+      ],
+      "response": "Studies! 📚 How's it going?"
+    },
+    {
+      "keywords": [
+        "money",
+        "cash",
+        "💰",
+        "rich",
+        "salary"
+      ],
+      "response": "Money talk! 💰 Everyone needs more of it 😄"
+    },
+    {
+      "keywords": [
+        "time",
+        "what time",
+        "clock",
+        "time da"
+      ],
+      "response": "Time check! ⏰ It's ${new Date().toLocaleTimeString()}."
+    },
+    {
+      "keywords": [
+        "why",
+        "why not",
+        "yenna",
+        "why da"
+      ],
+      "response": "Why not? 😄 Just go for it!"
+    },
+    {
+      "keywords": [
+        "how",
+        "how da",
+        "how to",
+        "epdi"
+      ],
+      "response": "How? Simple — just try it! 😄 I can help if you want."
+    },
+    {
+      "keywords": [
+        "what",
+        "what da",
+        "enna da"
+      ],
+      "response": "What? 😄 Tell me more!"
+    },
+    {
+      "keywords": [
+        "who",
+        "who da",
+        "yaaru"
+      ],
+      "response": "Who? 😄 I'm curious now!"
+    },
+    {
+      "keywords": [
+        "where",
+        "where da",
+        "engay"
+      ],
+      "response": "Where? 😄 Are you going somewhere fun?"
+    },
+    {
+      "keywords": [
+        "when",
+        "when da",
+        "eppo"
+      ],
+      "response": "When? 😄 The sooner the better!"
+    },
+    {
+      "keywords": [
+        "f",
+        "press f",
+        "big f"
+      ],
+      "response": "F in the chat 🕊️"
+    },
+    {
+      "keywords": [
+        "noob",
+        "newbie"
+      ],
+      "response": "We all start somewhere! 😄 Keep going!"
+    },
+    {
+      "keywords": [
+        "pro",
+        "pro player",
+        "pro gamer"
+      ],
+      "response": "Pro spotted! 👑 Respect!"
+    },
+    {
+      "keywords": [
+        "gg",
+        "good game",
+        "wp"
+      ],
+      "response": "GG! 🤝 Well played!"
+    },
+    {
+      "keywords": [
+        "wtf",
+        "wth",
+        "damn",
+        "daang"
+      ],
+      "response": "😂😂😂"
+    },
+    {
+      "keywords": [
+        "bruh",
+        "brah"
+      ],
+      "response": "Bruh moment 😂"
+    },
+    {
+      "keywords": [
+        "fr",
+        "for real",
+        "real talk"
+      ],
+      "response": "Fr fr 😂 I believe you!"
+    },
+    {
+      "keywords": [
+        "ngl",
+        "not gonna lie"
+      ],
+      "response": "Ngl, same 😄"
+    },
+    {
+      "keywords": [
+        "tbh",
+        "to be honest"
+      ],
+      "response": "Tbh... same here 😄"
+    },
+    {
+      "keywords": [
+        "idk",
+        "dont know",
+        "don't know",
+        "theriyala da"
+      ],
+      "response": "Idk either 😅 Let's figure it out together!"
+    },
+    {
+      "keywords": [
+        "ic",
+        "i see",
+        "ohh",
+        "aha",
+        "ohh ok"
+      ],
+      "response": "Ohh I see! 👀"
+    },
+    {
+      "keywords": [
+        "yep",
+        "yup",
+        "yeah",
+        "ya",
+        "yea",
+        "yah",
+        "haa"
+      ],
+      "response": "Yep! 😊"
+    },
+    {
+      "keywords": [
+        "nope",
+        "nah",
+        "noo",
+        "nop"
+      ],
+      "response": "Nah? Okay 😄"
+    },
+    {
+      "keywords": [
+        "maybe",
+        "perhaps"
+      ],
+      "response": "Maybe maybe 😄 Let's see!"
+    },
+    {
+      "keywords": [
+        "sure",
+        "definitely",
+        "of course"
+      ],
+      "response": "Sure thing! 💪"
+    },
+    {
+      "keywords": [
+        "wait",
+        "hold on",
+        "sek"
+      ],
+      "response": "I'm waiting... ⏳"
+    },
+    {
+      "keywords": [
+        "okay okay",
+        "ok ok",
+        "sari sari"
+      ],
+      "response": "Okay okay! 😄 Chill!"
+    },
+    {
+      "keywords": [
+        "🤔",
+        "think",
+        "thinking"
+      ],
+      "response": "Hmm, let me think... 🤔"
+    },
+    {
+      "keywords": [
+        "😅",
+        "oops",
+        "my bad",
+        "sorry da"
+      ],
+      "response": "It's okay! 😅 No worries!"
+    },
+    {
+      "keywords": [
+        "🙏",
+        "namaskaram",
+        "please"
+      ],
+      "response": "🙏"
+    },
+    {
+      "keywords": [
+        "👌",
+        "👍",
+        "perfect"
+      ],
+      "response": "Perfect! 👌"
+    },
+    {
+      "keywords": [
+        "💯",
+        "100 percent",
+        "hundred percent"
+      ],
+      "response": "100%! 💯🔥"
+    },
+    {
+      "keywords": [
+        "😎",
+        "sigma",
+        "cool da"
+      ],
+      "response": "Sigma! 😎 Respect!"
+    },
+    {
+      "keywords": [
+        "😇",
+        "innocent",
+        "angel"
+      ],
+      "response": "So innocent! 😇"
+    },
+    {
+      "keywords": [
+        "😈",
+        "devil",
+        "evil"
+      ],
+      "response": "Evil mode activated! 😈"
+    },
+    {
+      "keywords": [
+        "💀",
+        "dead",
+        "im dead",
+        "dead da"
+      ],
+      "response": "💀😂"
+    },
+    {
+      "keywords": [
+        "🗿",
+        "stone",
+        "moha"
+      ],
+      "response": "🗿"
+    },
+    {
+      "keywords": [
+        "💪",
+        "strong",
+        "gym"
+      ],
+      "response": "Strong! 💪 Keep going!"
+    },
+    {
+      "keywords": [
+        "🫂",
+        "hug",
+        "hugs"
+      ],
+      "response": "Hugs! 🫂"
+    },
+    {
+      "keywords": [
+        "🔥",
+        "on fire",
+        "fire da"
+      ],
+      "response": "🔥🔥"
+    },
+    {
+      "keywords": [
+        "🍕",
+        "pizza"
+      ],
+      "response": "Pizza! 🍕 Now I'm hungry 😄"
+    },
+    {
+      "keywords": [
+        "🌙",
+        "moon",
+        "night"
+      ],
+      "response": "The moon is beautiful tonight 🌙"
+    },
+    {
+      "keywords": [
+        "☀️",
+        "sun",
+        "sunny"
+      ],
+      "response": "Sunny vibes! ☀️"
+    },
+    {
+      "keywords": [
+        "🏏",
+        "batting"
+      ],
+      "response": "Go big or go home! 🏏"
+    },
+    {
+      "keywords": [
+        "🏆",
+        "champion",
+        "trophy"
+      ],
+      "response": "Champion energy! 🏆"
+    },
+    {
+      "keywords": [
+        "🥇",
+        "gold",
+        "first place"
+      ],
+      "response": "Gold! 🥇 Amazing!"
+    },
+    {
+      "keywords": [
+        "hi",
+        "hello",
+        "hey"
+      ],
+      "response": "Heyyy! 😄 எப்படி இருக்க?"
+    },
+    {
+      "keywords": [
+        "hi",
+        "hello",
+        "hey"
+      ],
+      "response": "Hello! 👋 Long time no see! What's up?"
+    },
+    {
+      "keywords": [
+        "good morning",
+        "gm"
+      ],
+      "response": "Morning! ☀️ நல்லா எழுந்தீங்களா?"
+    },
+    {
+      "keywords": [
+        "good morning",
+        "gm"
+      ],
+      "response": "Good morning! 🌅 Wishing you a wonderful day!"
+    },
+    {
+      "keywords": [
+        "good night",
+        "gn"
+      ],
+      "response": "Good night! 🌙 நாளைக்கு பேசலாம்!"
+    },
+    {
+      "keywords": [
+        "good night",
+        "gn"
+      ],
+      "response": "Night night! 😴 Sweet dreams!"
+    },
+    {
+      "keywords": [
+        "how are you",
+        "hru",
+        "how r u",
+        "how are u"
+      ],
+      "response": "I'm awesome, thanks for asking! 😄 How's your day going?"
+    },
+    {
+      "keywords": [
+        "how are you",
+        "hru",
+        "how r u",
+        "how are u"
+      ],
+      "response": "All good da! 😎 You tell me first!"
+    },
+    {
+      "keywords": [
+        "ok",
+        "okay",
+        "k",
+        "kk"
+      ],
+      "response": "Okay! 😊"
+    },
+    {
+      "keywords": [
+        "bye",
+        "goodbye",
+        "see you",
+        "good bye",
+        "po"
+      ],
+      "response": "Bye! 👋 Take care, come back soon!"
+    },
+    {
+      "keywords": [
+        "thanks",
+        "thank you",
+        "thx",
+        "ty"
+      ],
+      "response": "Anytime! 😊 That's what I'm here for!"
+    },
+    {
+      "keywords": [
+        "love you",
+        "i love you"
+      ],
+      "response": "Love you more! ❤️"
+    },
+    {
+      "keywords": [
+        "sad",
+        "i am sad",
+        "😢"
+      ],
+      "response": "It's okay to be sad. 💙 I'm here, tell me what happened."
+    },
+    {
+      "keywords": [
+        "😂"
+      ],
+      "response": "😂😂😂 I can't stop laughing!"
+    },
+    {
+      "keywords": [
+        "🤣"
+      ],
+      "response": "🤣🤣 sameee!"
+    },
+    {
+      "keywords": [
+        "😭"
+      ],
+      "response": "Aww, don't cry 🥺 *virtual hug*"
+    },
+    {
+      "keywords": [
+        "🥺"
+      ],
+      "response": "🥺 that's so sweet!"
+    },
+    {
+      "keywords": [
+        "😍"
+      ],
+      "response": "😍😍"
+    },
+    {
+      "keywords": [
+        "😘"
+      ],
+      "response": "😘❤️"
+    },
+    {
+      "keywords": [
+        "😎"
+      ],
+      "response": "😎 cool cool cool!"
+    },
+    {
+      "keywords": [
+        "😡"
+      ],
+      "response": "Chill da! 😅 Take a deep breath."
+    },
+    {
+      "keywords": [
+        "😴"
+      ],
+      "response": "Sleepy time? 😴 Rest well!"
+    },
+    {
+      "keywords": [
+        "😋"
+      ],
+      "response": "Yummy! 😋 Now I'm hungry too!"
+    },
+    {
+      "keywords": [
+        "😅"
+      ],
+      "response": "😅 ahh okay okay!"
+    },
+    {
+      "keywords": [
+        "🤔"
+      ],
+      "response": "Hmm... 🤔 interesting!"
+    },
+    {
+      "keywords": [
+        "🙏"
+      ],
+      "response": "🙏🙏"
+    },
+    {
+      "keywords": [
+        "👍"
+      ],
+      "response": "👍👍"
+    },
+    {
+      "keywords": [
+        "👌"
+      ],
+      "response": "👌 perfect!"
+    },
+    {
+      "keywords": [
+        "💯"
+      ],
+      "response": "💯🔥"
+    },
+    {
+      "keywords": [
+        "🔥"
+      ],
+      "response": "🔥🔥🔥"
+    },
+    {
+      "keywords": [
+        "🎉"
+      ],
+      "response": "🎉🎉 party time!"
+    },
+    {
+      "keywords": [
+        "🥳"
+      ],
+      "response": "🥳🥳"
+    },
+    {
+      "keywords": [
+        "😱"
+      ],
+      "response": "😱 no way!"
+    },
+    {
+      "keywords": [
+        "🤗"
+      ],
+      "response": "🤗🤗"
+    },
+    {
+      "keywords": [
+        "😇"
+      ],
+      "response": "😇 angel mode!"
+    },
+    {
+      "keywords": [
+        "💀"
+      ],
+      "response": "💀😂"
+    },
+    {
+      "keywords": [
+        "🗿"
+      ],
+      "response": "🗿🗿"
+    },
+    {
+      "keywords": [
+        "💪"
+      ],
+      "response": "💪💪"
+    },
+    {
+      "keywords": [
+        "🫂"
+      ],
+      "response": "🫂🫂"
+    },
+    {
+      "keywords": [
+        "👀"
+      ],
+      "response": "👀👀"
+    },
+    {
+      "keywords": [
+        "😮"
+      ],
+      "response": "😮 oh really?"
+    },
+    {
+      "keywords": [
+        "😊"
+      ],
+      "response": "😊😊"
+    },
+    {
+      "keywords": [
+        "🤝"
+      ],
+      "response": "🤝 deal!"
+    },
+    {
+      "keywords": [
+        "😆"
+      ],
+      "response": "😆😆"
+    }
+  ]
+}
